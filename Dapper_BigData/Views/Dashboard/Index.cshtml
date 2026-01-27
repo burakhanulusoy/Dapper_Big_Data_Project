@@ -1,6 +1,1122 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/UI/Index.cshtml";
 }
+
+
+<div class="main-content-container overflow-hidden">
+    <div class="card bg-white p-20 rounded-10 border border-white mb-4 py-50">
+        <div class="row">
+            <div class="col-xxl-3 col-md-6 col-xxxl-6">
+                <div class="position-relative border-end-custom pe-10">
+                    <div class="d-sm-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-10">New Users</h3>
+                            <h2 class="fs-26 fw-medium mb-0 lh-1">705</h2>
+                        </div>
+                        <div class="flex-shrink-0" style="margin-bottom: -25px;">
+                            <div id="new_user_chart" class="chart-position"></div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center" style="margin-top: 25px;">
+                        <span class="d-flex align-content-center gap-1 bg-success bg-opacity-10 border border-success" style="padding: 3px 5px;">
+                            <i class="material-symbols-outlined fs-14 text-success">trending_up</i>
+                            <span class="lh-1 fs-14 text-success">2.15%</span>
+                        </span>
+                        <p class="mb-0 fs-14 pe-3 d-block" style="margin-top: 2px;">This Week</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-3 col-md-6 col-xxxl-6">
+                <div class="position-relative border-end-custom pe-10">
+                    <div class="d-sm-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-10">Active Users</h3>
+                            <h2 class="fs-26 fw-medium mb-0 lh-1">94,817</h2>
+                        </div>
+                        <div class="flex-shrink-0" style="margin-bottom: -25px;">
+                            <div id="active_user_chart" class="chart-position"></div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center" style="margin-top: 25px;">
+                        <span class="d-flex align-content-center gap-1 bg-success bg-opacity-10 border border-success" style="padding: 3px 5px;">
+                            <i class="material-symbols-outlined fs-14 text-success">trending_up</i>
+                            <span class="lh-1 fs-14 text-success">8.75%</span>
+                        </span>
+                        <p class="mb-0 fs-14 pe-3 d-block" style="margin-top: 2px;">This Month</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-3 col-md-6 col-xxxl-6">
+                <div class="position-relative border-end-custom pe-10">
+                    <div class="d-sm-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-10">Lead Conversation</h3>
+                            <h2 class="fs-26 fw-medium mb-0 lh-1">25.99%</h2>
+                        </div>
+                        <div class="flex-shrink-0" style="margin-bottom: -25px;">
+                            <div id="lead_conversation_chart" class="chart-position"></div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center" style="margin-top: 25px;">
+                        <span class="d-flex align-content-center gap-1 bg-danger bg-opacity-10 border border-danger" style="padding: 3px 5px;">
+                            <i class="material-symbols-outlined fs-14 text-danger">trending_down</i>
+                            <span class="lh-1 fs-14 text-danger">1.25%</span>
+                        </span>
+                        <p class="mb-0 fs-14 pe-3 d-block" style="margin-top: 2px;">Last Week</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-3 col-md-6 col-xxxl-6">
+                <div class="position-relative pe-10">
+                    <div class="d-sm-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-10">Revenue Growth</h3>
+                            <h2 class="fs-26 fw-medium mb-0 lh-1">$1,207</h2>
+                        </div>
+                        <div class="flex-shrink-0" style="margin-bottom: -25px;">
+                            <div id="revenue_growth_chart" class="chart-position" style="bottom: -8px;"></div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center" style="margin-top: 25px;">
+                        <span class="d-flex align-content-center gap-1 bg-success bg-opacity-10 border border-success" style="padding: 3px 5px;">
+                            <i class="material-symbols-outlined fs-14 text-success">trending_up</i>
+                            <span class="lh-1 fs-14 text-success">20.75%</span>
+                        </span>
+                        <p class="mb-0 fs-14 pe-3 d-block" style="margin-top: 2px;">Weekly Growth</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xxl-4 col-xxxl-6">
+            <div class="card bg-white p-20 rounded-10 border border-white mb-4">
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-20">
+                    <h3>Most Leads</h3>
+
+                    <div class="dropdown select-dropdown without-border">
+                        <button class="dropdown-toggle bg-transparent text-secondary fs-15" data-bs-toggle="dropdown" aria-expanded="false">
+                            This Month
+                        </button>
+
+                        <ul class="dropdown-menu dropdown-menu-end bg-white border-0 box-shadow rounded-10" data-simplebar>
+                            <li>
+                                <button class="dropdown-item text-secondary">This Day</button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item text-secondary">This Week</button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item text-secondary">This Month</button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item text-secondary">This Year</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <div id="most_leads_chart2" style="max-width: 305px; margin: auto;"></div>
+                </div>
+
+                <ul class="p-0 mb-0 list-unstyled last-child-none icon-bg">
+                    <li class="d-flex justify-content-between align-items-center border-border-color pb-10 mb-10" style="border-bottom: 1px dashed;">
+                        <div class="d-flex align-items-center">
+                            <div class="text-center rounded-circle" style="width: 50px; height: 50px; background-color: #f4f6fc;">
+                                <i class="material-symbols-outlined fs-24 text-primary position-relative" style="line-height: 50px; left: -2px;">share</i>
+                            </div>
+                            <span class="ms-12 fs-16 text-secondary fw-medium">Social</span>
+                        </div>
+                        <span class="fs-16">9,562</span>
+                        <span class="fs-16">30%</span>
+                    </li>
+                    <li class="d-flex justify-content-between align-items-center border-border-color pb-10 mb-10" style="border-bottom: 1px dashed;">
+                        <div class="d-flex align-items-center">
+                            <div class="text-center rounded-circle" style="width: 50px; height: 50px; background-color: #f4f6fc;">
+                                <i class="material-symbols-outlined fs-24 text-info" style="line-height: 50px;">email</i>
+                            </div>
+                            <span class="ms-12 fs-16 text-secondary fw-medium">Email</span>
+                        </div>
+                        <span class="fs-16">18,426</span>
+                        <span class="fs-16">55%</span>
+                    </li>
+                    <li class="d-flex justify-content-between align-items-center border-border-color pb-10 mb-10" style="border-bottom: 1px dashed;">
+                        <div class="d-flex align-items-center">
+                            <div class="text-center rounded-circle" style="width: 50px; height: 50px; background-color: #f4f6fc;">
+                                <i class="material-symbols-outlined fs-24 text-primary-50" style="line-height: 50px;">call</i>
+                            </div>
+                            <span class="ms-12 fs-16 text-secondary fw-medium">Call</span>
+                        </div>
+                        <span class="fs-16">4,753</span>
+                        <span class="fs-16">10%</span>
+                    </li>
+                    <li class="d-flex justify-content-between align-items-center border-border-color pb-10 mb-10" style="border-bottom: 1px dashed;">
+                        <div class="d-flex align-items-center">
+                            <div class="text-center rounded-circle" style="width: 50px; height: 50px; background-color: #f4f6fc;">
+                                <i class="material-symbols-outlined fs-24 text-warning" style="line-height: 50px;">category</i>
+                            </div>
+                            <span class="ms-12 fs-16 text-secondary fw-medium">Others</span>
+                        </div>
+                        <span class="fs-16">2,657</span>
+                        <span class="fs-16">5%</span>
+                    </li>
+                </ul>
+           
+            
+            </div>
+        </div>
+        <div class="col-xxl-4 col-xxxl-6">
+            <div class="card bg-white p-20 rounded-10 border border-white mb-4">
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-20">
+                    <h3>Country Stats</h3>
+
+                    <div class="dropdown select-dropdown without-border">
+                        <button class="dropdown-toggle bg-transparent text-secondary fs-15" data-bs-toggle="dropdown" aria-expanded="false">
+                            This Month
+                        </button>
+
+                        <ul class="dropdown-menu dropdown-menu-end bg-white border-0 box-shadow rounded-10" data-simplebar>
+                            <li>
+                                <button class="dropdown-item text-secondary">This Day</button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item text-secondary">This Week</button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item text-secondary">This Month</button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item text-secondary">This Year</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="text-center mb-3">
+                    <div id="country_stats_map" style="height: 284px;"></div>
+                </div>
+
+                <div class="default-table-area mx-minus-1 country-stats-table">
+                    <div class="table-responsive">
+                        <table class="table align-middle">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="bg-transparent py-0 ps-0">Country</th>
+                                    <th scope="col" class="bg-transparent py-0">User</th>
+                                    <th scope="col" class="bg-transparent py-0 pe-0">Bounce Rate</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="ps-0">
+                                        <div class="d-flex align-items-center text-decoration-none">
+                                            <div class="flex-shrink-0">
+                                                <img src="assets/images/usa.png" class="rounded-circle" style="width: 20px; height: 20px;" alt="usa">
+                                            </div>
+                                            <div class="flex-grow-1 ms-2">
+                                                <h3 class="fw-medium mb-0 fs-16 position-relative top-2">United States</h3>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-body fw-normal">17003</td>
+                                    <td class="text-body fw-normal pe-0">0.83%</td>
+                                </tr>
+                                <tr>
+                                    <td class="ps-0">
+                                        <div class="d-flex align-items-center text-decoration-none">
+                                            <div class="flex-shrink-0">
+                                                <img src="assets/images/china.png" class="rounded-circle" style="width: 20px; height: 20px;" alt="china">
+                                            </div>
+                                            <div class="flex-grow-1 ms-2">
+                                                <h3 class="fw-medium mb-0 fs-16 position-relative top-2">China</h3>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-body fw-normal">16843</td>
+                                    <td class="text-body fw-normal pe-0">0.75%</td>
+                                </tr>
+                                <tr>
+                                    <td class="ps-0">
+                                        <div class="d-flex align-items-center text-decoration-none">
+                                            <div class="flex-shrink-0">
+                                                <img src="assets/images/germany.png" class="rounded-circle" style="width: 20px; height: 20px;" alt="germany">
+                                            </div>
+                                            <div class="flex-grow-1 ms-2">
+                                                <h3 class="fw-medium mb-0 fs-16 position-relative top-2">Germany</h3>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-body fw-normal">14285</td>
+                                    <td class="text-body fw-normal pe-0">0.49%</td>
+                                </tr>
+                                <tr class="last-child-border-none">
+                                    <td class="ps-0">
+                                        <div class="d-flex align-items-center text-decoration-none">
+                                            <div class="flex-shrink-0">
+                                                <img src="assets/images/australia.png" class="rounded-circle" style="width: 20px; height: 20px;" alt="australia">
+                                            </div>
+                                            <div class="flex-grow-1 ms-2">
+                                                <h3 class="fw-medium mb-0 fs-16 position-relative top-2">Australia</h3>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-body fw-normal">9573</td>
+                                    <td class="text-body fw-normal pe-0">0.18%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xxl-4 col-xxxl-12">
+            <div class="row">
+                <div class="col-xxxl-6 col-xxl-12">
+                    <div class="card p-20 rounded-10 border border-white mb-4" style="background: linear-gradient(180deg, #5c4edb, #796df6) !important;">
+                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-0">
+                            <h3 class="text-white">Tasks Stats</h3>
+
+                            <div class="dropdown select-dropdown without-border">
+                                <button class="dropdown-toggle down-arrow-white bg-transparent text-white fs-15" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Year 2025
+                                </button>
+
+                                <ul class="dropdown-menu dropdown-menu-end bg-white border-0 box-shadow rounded-10" data-simplebar>
+                                    <li>
+                                        <button class="dropdown-item text-secondary">Year 2025</button>
+                                    </li>
+                                    <li>
+                                        <button class="dropdown-item text-secondary">Year 2025</button>
+                                    </li>
+                                    <li>
+                                        <button class="dropdown-item text-secondary">Year 2023</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div id="tasks_stats_chart" style="margin-bottom: -17px;"></div>
+                    </div>
+                </div>
+                <div class="col-xxxl-6 col-xxl-12">
+                    <div class="card bg-white p-20 rounded-10 border border-white mb-4">
+                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-0">
+                            <h3>Earning Reports</h3>
+
+                            <div class="dropdown select-dropdown">
+                                <button class="dropdown-toggle bg-transparent text-secondary fs-15" data-bs-toggle="dropdown" aria-expanded="false">
+                                    This Week
+                                </button>
+
+                                <ul class="dropdown-menu dropdown-menu-end bg-white border-0 box-shadow rounded-10" data-simplebar>
+                                    <li>
+                                        <button class="dropdown-item text-secondary">This Day</button>
+                                    </li>
+                                    <li>
+                                        <button class="dropdown-item text-secondary">This Week</button>
+                                    </li>
+                                    <li>
+                                        <button class="dropdown-item text-secondary">This Month</button>
+                                    </li>
+                                    <li>
+                                        <button class="dropdown-item text-secondary">This Year</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div id="earning_reports_chart" style="margin-bottom: -17px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-5">
+            <div class="card bg-white p-20 rounded-10 border border-white mb-4">
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-20">
+                    <h3>Top Customers</h3>
+
+                    <div class="dropdown select-dropdown without-border">
+                        <button class="dropdown-toggle bg-transparent text-secondary fs-15" data-bs-toggle="dropdown" aria-expanded="false">
+                            This Week
+                        </button>
+
+                        <ul class="dropdown-menu dropdown-menu-end bg-white border-0 box-shadow rounded-10" data-simplebar>
+                            <li>
+                                <button class="dropdown-item text-secondary">This Day</button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item text-secondary">This Week</button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item text-secondary">This Month</button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item text-secondary">This Year</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="default-table-area without-header table-top-customers">
+                    <div class="table-responsive">
+                        <table class="table align-middle">
+                            <tbody>
+                                <tr>
+                                    <td class="ps-0">
+                                        <div class="d-flex align-items-center text-decoration-none">
+                                            <div class="flex-shrink-0">
+                                                <img src="assets/images/user6.jpg" class="rounded-circle" style="width: 50px; height: 50px;" alt="user6">
+                                            </div>
+                                            <div class="flex-grow-1 ms-12">
+                                                <h3 class="fw-normal">Mark Stjohn</h3>
+                                                <span class="fs-14 text-body fw-normal">Customer ID #76431</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="customers.html" class="text-body hover-text text-decoration-none fw-normal">View Profile</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="ps-0">
+                                        <div class="d-flex align-items-center text-decoration-none">
+                                            <div class="flex-shrink-0">
+                                                <img src="assets/images/user7.jpg" class="rounded-circle" style="width: 50px; height: 50px;" alt="user7">
+                                            </div>
+                                            <div class="flex-grow-1 ms-12">
+                                                <h3 class="fw-normal">Joan Stanley</h3>
+                                                <span class="fs-14 text-body fw-normal">Customer ID #64815</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="customers.html" class="text-body hover-text text-decoration-none fw-normal">View Profile</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="ps-0">
+                                        <div class="d-flex align-items-center text-decoration-none">
+                                            <div class="flex-shrink-0">
+                                                <img src="assets/images/user8.jpg" class="rounded-circle" style="width: 50px; height: 50px;" alt="user8">
+                                            </div>
+                                            <div class="flex-grow-1 ms-12">
+                                                <h3 class="fw-normal">Jacob Bell</h3>
+                                                <span class="fs-14 text-body fw-normal">Customer ID #34581</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="customers.html" class="text-body hover-text text-decoration-none fw-normal">View Profile</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="ps-0">
+                                        <div class="d-flex align-items-center text-decoration-none">
+                                            <div class="flex-shrink-0">
+                                                <img src="assets/images/user9.jpg" class="rounded-circle" style="width: 50px; height: 50px;" alt="user9">
+                                            </div>
+                                            <div class="flex-grow-1 ms-12">
+                                                <h3 class="fw-normal">Donald Bryan</h3>
+                                                <span class="fs-14 text-body fw-normal">Customer ID #67941</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="customers.html" class="text-body hover-text text-decoration-none fw-normal">View Profile</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="ps-0">
+                                        <div class="d-flex align-items-center text-decoration-none">
+                                            <div class="flex-shrink-0">
+                                                <img src="assets/images/user10.jpg" class="rounded-circle" style="width: 50px; height: 50px;" alt="user10">
+                                            </div>
+                                            <div class="flex-grow-1 ms-12">
+                                                <h3 class="fw-normal">Kristina Blomquist</h3>
+                                                <span class="fs-14 text-body fw-normal">Customer ID #36985</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="customers.html" class="text-body hover-text text-decoration-none fw-normal">View Profile</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="ps-0">
+                                        <div class="d-flex align-items-center text-decoration-none">
+                                            <div class="flex-shrink-0">
+                                                <img src="assets/images/user11.jpg" class="rounded-circle" style="width: 50px; height: 50px;" alt="user11">
+                                            </div>
+                                            <div class="flex-grow-1 ms-12">
+                                                <h3 class="fw-normal">Jeffrey Morrison</h3>
+                                                <span class="fs-14 text-body fw-normal">Customer ID #26985</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="customers.html" class="text-body hover-text text-decoration-none fw-normal">View Profile</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="d-flex justify-content-center justify-content-sm-between align-items-center text-center flex-wrap gap-2 showing-wrap pt-15">
+                        <span class="fs-15">Showing 1 to 6 of 50 entries</span>
+
+                        <nav class="custom-pagination" aria-label="Page navigation example">
+                            <ul class="pagination mb-0 justify-content-center">
+                                <li class="page-item">
+                                    <button class="page-link icon" aria-label="Previous">
+                                        <i class="material-symbols-outlined">west</i>
+                                    </button>
+                                </li>
+                                <!-- <li class="page-item">
+                                    <button class="page-link active">1</button>
+                                </li>
+                                <li class="page-item">
+                                    <button class="page-link">2</button>
+                                </li>
+                                <li class="page-item">
+                                    <button class="page-link">3</button>
+                                </li> -->
+                                <li class="page-item">
+                                    <button class="page-link icon" aria-label="Next">
+                                        <i class="material-symbols-outlined">east</i>
+                                    </button>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-7">
+            <div class="card bg-white rounded-10 border border-white mb-4">
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 p-20">
+                    <h3>Recent Leads</h3>
+
+                    <div class="dropdown select-dropdown without-border">
+                        <button class="dropdown-toggle bg-transparent text-secondary fs-15" data-bs-toggle="dropdown" aria-expanded="false">
+                            This Week
+                        </button>
+
+                        <ul class="dropdown-menu dropdown-menu-end bg-white border-0 box-shadow rounded-10" data-simplebar>
+                            <li>
+                                <button class="dropdown-item text-secondary">This Day</button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item text-secondary">This Week</button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item text-secondary">This Month</button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item text-secondary">This Year</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="default-table-area mx-minus-1 table-recent-leads">
+                    <div class="table-responsive">
+                        <table class="table align-middle">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="fw-medium">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="flexCheckDefault14">
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="fw-medium">Customer</th>
+                                    <th scope="col" class="fw-medium">Email</th>
+                                    <th scope="col" class="fw-medium">Source</th>
+                                    <th scope="col" class="fw-medium">Status</th>
+                                    <th scope="col" class="fw-medium">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-body" style="width: 62px;">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="flexCheckDefault2">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="customers.html" class="d-flex align-items-center text-decoration-none">
+                                            <div class="flex-shrink-0">
+                                                <img src="assets/images/user1.jpg" class="rounded-circle" style="width: 50px; height: 50px;" alt="user1">
+                                            </div>
+                                            <div class="flex-grow-1 ms-12">
+                                                <h3 class="fw-medium hover-text mb-0 fs-16">Carlos Daley</h3>
+                                            </div>
+                                        </a>
+                                    </td>
+                                    <td class="text-body">carlos@fila.com</td>
+                                    <td class="text-body">Website</td>
+                                    <td>
+                                        <span class="text-success bg-success bg-opacity-10 fs-15 fw-normal d-inline-block default-badge">New</span>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex justify-content-end" style="gap: 12px;">
+                                            <button class="bg-transparent p-0 border-0" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View">
+                                                <i class="material-symbols-outlined fs-16 fw-normal text-primary">visibility</i>
+                                            </button>
+                                            <button class="bg-transparent p-0 border-0 hover-text-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit Lead">
+                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">edit</i>
+                                            </button>
+                                            <button class="bg-transparent p-0 border-0 hover-text-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete">
+                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">delete</i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-body">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="flexCheckDefault3">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="customers.html" class="d-flex align-items-center text-decoration-none">
+                                            <div class="flex-shrink-0">
+                                                <img src="assets/images/user2.jpg" class="rounded-circle" style="width: 50px; height: 50px;" alt="user2">
+                                            </div>
+                                            <div class="flex-grow-1 ms-12">
+                                                <h3 class="fw-medium hover-text mb-0 fs-16">Dorothy Young</h3>
+                                            </div>
+                                        </a>
+                                    </td>
+                                    <td class="text-body">dorothy@fila.com</td>
+                                    <td class="text-body">Referral</td>
+                                    <td>
+                                        <span class="text-primary bg-primary bg-opacity-10 fs-15 fw-normal d-inline-block default-badge">Won</span>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex justify-content-end" style="gap: 12px;">
+                                            <button class="bg-transparent p-0 border-0" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View">
+                                                <i class="material-symbols-outlined fs-16 fw-normal text-primary">visibility</i>
+                                            </button>
+                                            <button class="bg-transparent p-0 border-0 hover-text-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit Lead">
+                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">edit</i>
+                                            </button>
+                                            <button class="bg-transparent p-0 border-0 hover-text-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete">
+                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">delete</i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-body">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="flexCheckDefault4">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="customers.html" class="d-flex align-items-center text-decoration-none">
+                                            <div class="flex-shrink-0">
+                                                <img src="assets/images/user3.jpg" class="rounded-circle" style="width: 50px; height: 50px;" alt="user3">
+                                            </div>
+                                            <div class="flex-grow-1 ms-12">
+                                                <h3 class="fw-medium hover-text mb-0 fs-16">Greg Woody</h3>
+                                            </div>
+                                        </a>
+                                    </td>
+                                    <td class="text-body">greg@fila.com</td>
+                                    <td class="text-body">Cold Call</td>
+                                    <td>
+                                        <span class="text-warning bg-warning bg-opacity-10 fs-15 fw-normal d-inline-block default-badge">In Progress</span>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex justify-content-end" style="gap: 12px;">
+                                            <button class="bg-transparent p-0 border-0" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View">
+                                                <i class="material-symbols-outlined fs-16 fw-normal text-primary">visibility</i>
+                                            </button>
+                                            <button class="bg-transparent p-0 border-0 hover-text-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit Lead">
+                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">edit</i>
+                                            </button>
+                                            <button class="bg-transparent p-0 border-0 hover-text-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete">
+                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">delete</i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-body">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="flexCheckDefault5">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="customers.html" class="d-flex align-items-center text-decoration-none">
+                                            <div class="flex-shrink-0">
+                                                <img src="assets/images/user4.jpg" class="rounded-circle" style="width: 50px; height: 50px;" alt="user4">
+                                            </div>
+                                            <div class="flex-grow-1 ms-12">
+                                                <h3 class="fw-medium hover-text mb-0 fs-16">Deborah Rosol</h3>
+                                            </div>
+                                        </a>
+                                    </td>
+                                    <td class="text-body">deborah@fila.com</td>
+                                    <td class="text-body">Email Campaign</td>
+                                    <td>
+                                        <span class="text-danger bg-danger bg-opacity-10 fs-15 fw-normal d-inline-block default-badge">Lost</span>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex justify-content-end" style="gap: 12px;">
+                                            <button class="bg-transparent p-0 border-0" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View">
+                                                <i class="material-symbols-outlined fs-16 fw-normal text-primary">visibility</i>
+                                            </button>
+                                            <button class="bg-transparent p-0 border-0 hover-text-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit Lead">
+                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">edit</i>
+                                            </button>
+                                            <button class="bg-transparent p-0 border-0 hover-text-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete">
+                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">delete</i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-body">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="flexCheckDefault6">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="customers.html" class="d-flex align-items-center text-decoration-none">
+                                            <div class="flex-shrink-0">
+                                                <img src="assets/images/user5.jpg" class="rounded-circle" style="width: 50px; height: 50px;" alt="user1">
+                                            </div>
+                                            <div class="flex-grow-1 ms-12">
+                                                <h3 class="fw-medium hover-text mb-0 fs-16">Kendall Allen</h3>
+                                            </div>
+                                        </a>
+                                    </td>
+                                    <td class="text-body">kendall@fila.com</td>
+                                    <td class="text-body">Online Store</td>
+                                    <td>
+                                        <span class="text-success bg-success bg-opacity-10 fs-15 fw-normal d-inline-block default-badge">New</span>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex justify-content-end" style="gap: 12px;">
+                                            <button class="bg-transparent p-0 border-0" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View">
+                                                <i class="material-symbols-outlined fs-16 fw-normal text-primary">visibility</i>
+                                            </button>
+                                            <button class="bg-transparent p-0 border-0 hover-text-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit Lead">
+                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">edit</i>
+                                            </button>
+                                            <button class="bg-transparent p-0 border-0 hover-text-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete">
+                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">delete</i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="d-flex justify-content-center justify-content-sm-between align-items-center text-center flex-wrap gap-2 showing-wrap pt-15 p-20">
+                        <span class="fs-15">Showing 1 to 5 of 50 entries</span>
+
+                        <nav class="custom-pagination" aria-label="Page navigation example">
+                            <ul class="pagination mb-0 justify-content-center">
+                                <li class="page-item">
+                                    <button class="page-link icon" aria-label="Previous">
+                                        <i class="material-symbols-outlined">west</i>
+                                    </button>
+                                </li>
+                                <li class="page-item">
+                                    <button class="page-link active">1</button>
+                                </li>
+                                <li class="page-item">
+                                    <button class="page-link">2</button>
+                                </li>
+                                <li class="page-item">
+                                    <button class="page-link">3</button>
+                                </li>
+                                <li class="page-item">
+                                    <button class="page-link icon" aria-label="Next">
+                                        <i class="material-symbols-outlined">east</i>
+                                    </button>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xxl-8 col-xxxl-12">
+            <div class="card bg-white rounded-10 border border-white mb-4">
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 p-20">
+                    <h3>To Do List</h3>
+
+                    <form class="table-src-form position-relative ms-0">
+                        <input type="text" class="form-control" placeholder="Search here...">
+                        <div class="src-btn position-absolute top-50 start-0 translate-middle-y bg-transparent p-0 border-0">
+                            <span class="material-symbols-outlined">search</span>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="default-table-area mx-minus-1 table-to-do-list">
+                    <div class="table-responsive">
+                        <table class="table align-middle">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="fw-medium pe-0">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="flexCheckDefault7">
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="fw-medium ps-0">Task ID</th>
+                                    <th scope="col" class="fw-medium">Task Name</th>
+                                    <th scope="col" class="fw-medium">Assigned To</th>
+                                    <th scope="col" class="fw-medium">Due Date</th>
+                                    <th scope="col" class="fw-medium">Priority</th>
+                                    <th scope="col" class="fw-medium">Status</th>
+                                    <th scope="col" class="fw-medium">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-body pe-0" style="width: 62px;">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="flexCheckDefault8">
+                                        </div>
+                                    </td>
+                                    <td class="text-body ps-0">#951</td>
+                                    <td class="text-body">Hotel management system</td>
+                                    <td class="text-secondary">Shawn Kennedy</td>
+                                    <td class="text-body">15 Nov, 2025</td>
+                                    <td class="text-body">High</td>
+                                    <td>
+                                        <span class="text-warning bg-warning bg-opacity-10 fs-15 fw-normal d-inline-block default-badge">In Progress</span>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex justify-content-end" style="gap: 12px;">
+                                            <button class="bg-transparent p-0 border-0" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View">
+                                                <i class="material-symbols-outlined fs-16 fw-normal text-primary">visibility</i>
+                                            </button>
+                                            <button class="bg-transparent p-0 border-0 hover-text-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit">
+                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">edit</i>
+                                            </button>
+                                            <button class="bg-transparent p-0 border-0 hover-text-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete">
+                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">delete</i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-body pe-0" style="width: 62px;">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="flexCheckDefault9">
+                                        </div>
+                                    </td>
+                                    <td class="text-body ps-0">#587</td>
+                                    <td class="text-body">Send proposal to APR Ltd</td>
+                                    <td class="text-secondary">Roberto Cruz</td>
+                                    <td class="text-body">14 Nov, 2025</td>
+                                    <td class="text-body">Medium</td>
+                                    <td>
+                                        <span class="text-success bg-success bg-opacity-10 fs-15 fw-normal d-inline-block default-badge">Pending</span>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex justify-content-end" style="gap: 12px;">
+                                            <button class="bg-transparent p-0 border-0" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View">
+                                                <i class="material-symbols-outlined fs-16 fw-normal text-primary">visibility</i>
+                                            </button>
+                                            <button class="bg-transparent p-0 border-0 hover-text-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit">
+                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">edit</i>
+                                            </button>
+                                            <button class="bg-transparent p-0 border-0 hover-text-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete">
+                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">delete</i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-body pe-0" style="width: 62px;">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="flexCheckDefault10">
+                                        </div>
+                                    </td>
+                                    <td class="text-body ps-0">#618</td>
+                                    <td class="text-body">Python upgrade</td>
+                                    <td class="text-secondary">Juli Johnson</td>
+                                    <td class="text-body">13 Nov, 2025</td>
+                                    <td class="text-body">High</td>
+                                    <td>
+                                        <span class="text-primary bg-primary bg-opacity-10 fs-15 fw-normal d-inline-block default-badge">Completed</span>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex justify-content-end" style="gap: 12px;">
+                                            <button class="bg-transparent p-0 border-0" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View">
+                                                <i class="material-symbols-outlined fs-16 fw-normal text-primary">visibility</i>
+                                            </button>
+                                            <button class="bg-transparent p-0 border-0 hover-text-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit">
+                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">edit</i>
+                                            </button>
+                                            <button class="bg-transparent p-0 border-0 hover-text-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete">
+                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">delete</i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-body pe-0" style="width: 62px;">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="flexCheckDefault11">
+                                        </div>
+                                    </td>
+                                    <td class="text-body ps-0">#367</td>
+                                    <td class="text-body">Schedule meeting with Fila</td>
+                                    <td class="text-secondary">Catalina Engles</td>
+                                    <td class="text-body">12 Nov, 2025</td>
+                                    <td class="text-body">Low</td>
+                                    <td>
+                                        <span class="text-danger bg-danger bg-opacity-10 fs-15 fw-normal d-inline-block default-badge">Not Started</span>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex justify-content-end" style="gap: 12px;">
+                                            <button class="bg-transparent p-0 border-0" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View">
+                                                <i class="material-symbols-outlined fs-16 fw-normal text-primary">visibility</i>
+                                            </button>
+                                            <button class="bg-transparent p-0 border-0 hover-text-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit">
+                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">edit</i>
+                                            </button>
+                                            <button class="bg-transparent p-0 border-0 hover-text-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete">
+                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">delete</i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-body pe-0" style="width: 62px;">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="flexCheckDefault12">
+                                        </div>
+                                    </td>
+                                    <td class="text-body ps-0">#761</td>
+                                    <td class="text-body">Engineering lite touch</td>
+                                    <td class="text-secondary">Louis Nagle</td>
+                                    <td class="text-body">11 Nov, 2025</td>
+                                    <td class="text-body">Medium</td>
+                                    <td>
+                                        <span class="text-warning bg-warning bg-opacity-10 fs-15 fw-normal d-inline-block default-badge">In Progress</span>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex justify-content-end" style="gap: 12px;">
+                                            <button class="bg-transparent p-0 border-0" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View">
+                                                <i class="material-symbols-outlined fs-16 fw-normal text-primary">visibility</i>
+                                            </button>
+                                            <button class="bg-transparent p-0 border-0 hover-text-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit">
+                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">edit</i>
+                                            </button>
+                                            <button class="bg-transparent p-0 border-0 hover-text-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete">
+                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">delete</i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-body pe-0" style="width: 62px;">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="flexCheckDefault13">
+                                        </div>
+                                    </td>
+                                    <td class="text-body ps-0">#431</td>
+                                    <td class="text-body">Refund bill payment</td>
+                                    <td class="text-secondary">Michael Marquez</td>
+                                    <td class="text-body">10 Nov, 2025</td>
+                                    <td class="text-body">Low</td>
+                                    <td>
+                                        <span class="text-danger bg-danger bg-opacity-10 fs-15 fw-normal d-inline-block default-badge">Not Started</span>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex justify-content-end" style="gap: 12px;">
+                                            <button class="bg-transparent p-0 border-0" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View">
+                                                <i class="material-symbols-outlined fs-16 fw-normal text-primary">visibility</i>
+                                            </button>
+                                            <button class="bg-transparent p-0 border-0 hover-text-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit">
+                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">edit</i>
+                                            </button>
+                                            <button class="bg-transparent p-0 border-0 hover-text-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete">
+                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">delete</i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="text-end p-20">
+                        <button class="bg-transparent text-primary fs-16 border-0 p-0" data-bs-toggle="modal" data-bs-target="#exampleModal">+ Add New Task</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xxl-4 col-xxxl-12">
+            <div class="row">
+                <div class="col-xxxl-6 col-xxl-12">
+                    <div class="card bg-white rounded-10 border border-white p-20 mb-4">
+                        <h3 class="mb-20">Client Payment Status</h3>
+                        <div id="client_payment_status_chart" style="margin-bottom: -15px;"></div>
+                    </div>
+                </div>
+                <div class="col-xxxl-6 col-xxl-12">
+                    <div class="card bg-white rounded-10 border-0 mb-4 overflow-hidden">
+                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 p-20">
+                            <h3 class="mb-20">Total Leads</h3>
+                            <span class="d-flex align-content-center gap-1 bg-success bg-opacity-10 border border-success" style="padding: 3px 5px;">
+                                <i class="material-symbols-outlined fs-14 text-success">trending_up</i>
+                                <span class="lh-1 fs-14 text-success">75%</span>
+                            </span>
+                        </div>
+
+                        <div class="total_leads_chart" style="margin: -54px -15px -32px -25px;">
+                            <div id="total_leads_chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Add New Task -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered rounded-10" style="max-width: 550px;">
+            <form class="modal-content bg-white">
+                <div class="modal-header border-border-color-40 p-20">
+                    <h1 class="modal-title fs-18 fw-medium mb-0" id="exampleModalLabel">Add New Task</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-20 pb-0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="mb-20">
+                                <label class="label">Task Name</label>
+                                <div class="form-floating">
+                                    <input type="email" class="form-control" id="floatingInput" placeholder="Task Name">
+                                    <label for="floatingInput">Task Name</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="mb-20">
+                                <label class="label">Assigned To</label>
+                                <div class="form-floating">
+                                    <select class="form-select form-control" id="floatingSelect2" aria-label="Floating label select example">
+                                        <option selected>Select</option>
+                                        <option value="1">Juli Johnson</option>
+                                        <option value="2">Catalina Engles</option>
+                                        <option value="3">Louis Nagle</option>
+                                        <option value="4">Michael Marquez</option>
+                                        <option value="4">Roberto Cruz</option>
+                                    </select>
+                                    <label for="floatingSelect2">Select</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="mb-20">
+                                <label class="label">Due Date</label>
+                                <input type="date" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="mb-20">
+                                <label class="label">Priority</label>
+                                <div class="form-floating">
+                                    <select class="form-select form-control" id="floatingSelect3" aria-label="Floating label select example">
+                                        <option selected>Select</option>
+                                        <option value="1">Medium</option>
+                                        <option value="2">Low</option>
+                                        <option value="3">High</option>
+                                    </select>
+                                    <label for="floatingSelect3">Select</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="mb-20">
+                                <label class="label">Status</label>
+                                <div class="form-floating">
+                                    <select class="form-select form-control" id="floatingSelect4" aria-label="Floating label select example">
+                                        <option selected>Select</option>
+                                        <option value="1">Pending</option>
+                                        <option value="2">Completed</option>
+                                        <option value="3">Not Started</option>
+                                        <option value="4">In Progress</option>
+                                    </select>
+                                    <label for="floatingSelect4">Select</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-0 p-20 pt-0">
+                    <button type="button" class="btn btn-danger fw-normal text-white" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary fw-normal text-white">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script>
+    const getMostLeadsId = document.getElementById('most_leads_chart2');
+    if (getMostLeadsId) {
+
+        // C#'tan gelen verileri JS değişkenlerine alıyoruz
+        var chartSeries = @Html.Raw(Json.Serialize(ViewBag.SeriesData));
+        var chartLabels = @Html.Raw(Json.Serialize(ViewBag.LabelsData));
+
+        var options = {
+            series: chartSeries, // [55, 30...] yerine veritabanından gelen sayılar
+            chart: {
+                width: 300,
+                type: "pie"
+            },
+            stroke: {
+                width: 2,
+                show: true
+            },
+            labels: chartLabels, // ["Email", "Social"...] yerine veritabanından gelen ülke isimleri
+            legend: {
+                show: false // İstersen true yapıp aşağıda isimleri gösterebilirsin
+            },
+            dataLabels: {
+                enabled: true, // Pasta diliminin üstünde sayı yazsın mı?
+                style: {
+                    fontSize: '14px',
+                    fontFamily: 'Outfit',
+                },
+                dropShadow: {
+                    enabled: false
+                }
+            },
+            colors: [
+                "#00cae3", "#0e7aee", "#796df6", "#ffb264", "#28a745", "#dc3545", "#ffc107"
+            ], // Renk sayısını biraz artırdım, ülke sayısı çok olursa renkler tekrar eder.
+            tooltip: {
+                y: {
+                    formatter: function(val) {
+                        return val + " Kişi"; // Tooltip'te % yerine Kişi yazsın
+                    }
+                }
+            }
+        };
+
+        // Initialize and render the chart
+        const chart = new ApexCharts(document.querySelector('#most_leads_chart2'), options);
+        chart.render();
+    }
+</script>
 
