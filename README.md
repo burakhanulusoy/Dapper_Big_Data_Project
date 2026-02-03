@@ -135,6 +135,20 @@ Bu proje veritabanı odaklıdır. Uygulamayı ayağa kaldırmadan önce aşağı
 
 Veri seti rastgele "lorem ipsum" verilerinden değil, belirli kategori, marka ve fiyat kurallarına göre oluşturulmuştur.
 
+2️⃣ Adım: Verilerin İçeri Aktarılması (Import Flat File)
+Oluşan .csv dosyalarını SQL Server'a aktarmak için:
+
+SSMS'i açın ve BigDataDapperDb veritabanına sağ tıklayın.
+
+Tasks -> Import Flat File seçeneğine tıklayın.
+
+Önce Final_Products.csv dosyasını seçip Products tablosu olarak aktarın.
+
+Ardından Final_Orders_Part_1.csv'den başlayarak 15 sipariş dosyasını ayrı ayrı tablolar halinde (Örn: Part1, Part2...) içeri aktarın.
+
+💡 İpucu: Import sırasında veri tiplerini (Date, Decimal, Int) kontrol etmeyi unutmayın.
+
+
 Aşağıdaki Python kodunu **Google Colab** veya lokal Python ortamınızda çalıştırarak `.csv` dosyalarını üretin.
 > **Not:** Bu script `Final_Products.csv` ve 15 parça halinde `Final_Orders_Part_X.csv` dosyaları üretecektir.
 
