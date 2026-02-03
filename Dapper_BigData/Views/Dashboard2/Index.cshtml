@@ -1,0 +1,769 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/UI/Index.cshtml";
+    var pieData = ViewBag.CategoryPieData as List<dynamic>;
+
+    // Toplam Sipariş Sayısını Hesapla (Ortadaki yazı için)
+    int totalOrders = 0;
+    if (pieData != null)
+    {
+        foreach (var item in pieData)
+        {
+            totalOrders += (int)item.value;
+        }
+    }
+
+    // Renk Paleti (Chart ve Liste için aynı renkler)
+    string[] colors = new string[] { "#25AFE0", "#FFBE40", "#EE6666", "#91CC75", "#00E396", "#666CFF", "#6FD3F7", "#5470C6", "#FAC858" };
+}
+
+
+
+<div class="main-content-container overflow-hidden">
+   
+    <div class="row">
+        <div class="col-xxl-3 col-xxxxl-6">
+            <div class="card bg-white p-20 py-30 rounded-10 border border-white mb-4 position-relative z-1">
+                <div class="d-flex">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-10 lh-1 fs-14 text-body">En Popüler Kategori</h3>
+                        <h2 class="fs-26 fw-bold mb-10 lh-1">
+                            @if (ViewBag.Card_MostOrdered != null)
+                            {
+                                @ViewBag.Card_MostOrdered.CategoryName
+                            }
+                        </h2>
+                        <div class="d-inline-block" style="margin-bottom: 1px;">
+                            <span class="d-flex align-content-center gap-1 bg-success-70 border-white rounded-1" style="padding: 3px 5px;">
+                                <i class="material-symbols-outlined fs-14 text-white">trending_up</i>
+                                <span class="lh-1 fs-14 text-white">Top 1</span>
+                            </span>
+                        </div>
+                        <p class="mb-0 fs-14">
+                            Toplam Sipariş:
+                            <strong>@(ViewBag.Card_MostOrdered != null ? ViewBag.Card_MostOrdered.OrderCount : 0)</strong>
+                        </p>
+                    </div>
+                    <div class="flex-shrink-0 ms-3 position-relative" style="width: 110px;">
+                        <div class="w-100 position-absolute top-50 translate-middle-y" style="right: -8px;">
+                            <div id="profit_loss_chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xxl-3 col-xxxxl-6">
+            <div class="card bg-white p-20 py-30 rounded-10 border border-white mb-4 position-relative z-1">
+                <div class="d-flex">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-10 lh-1 fs-14 text-body">En Az İlgi Gören</h3>
+                        <h2 class="fs-26 fw-bold mb-10 lh-1">
+                            @if (ViewBag.Card_LeastOrdered != null)
+                            {
+                                @ViewBag.Card_LeastOrdered.CategoryName
+                            }
+                        </h2>
+                        <div class="d-inline-block" style="margin-bottom: 1px;">
+                            <span class="d-flex align-content-center gap-1 bg-danger border-white rounded-1" style="padding: 3px 5px;">
+                                <i class="material-symbols-outlined fs-14 text-white">trending_down</i>
+                                <span class="lh-1 fs-14 text-white">Low</span>
+                            </span>
+                        </div>
+                        <p class="mb-0 fs-14">
+                            Toplam Sipariş:
+                            <strong>@(ViewBag.Card_LeastOrdered != null ? ViewBag.Card_LeastOrdered.OrderCount : 0)</strong>
+                        </p>
+                    </div>
+                    <div class="flex-shrink-0 ms-3 position-relative" style="width: 160px;">
+                        <div class="w-100 position-absolute top-50 translate-middle-y" style="right: -14px;">
+                            <div id="cash_flow_chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xxl-3 col-xxxxl-6">
+            <div class="card bg-white p-20 py-30 rounded-10 border border-white mb-4 position-relative z-1">
+                <div class="d-flex">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-10 lh-1 fs-14 text-body">En Pahalı Ürün</h3>
+                        <h2 class="fs-20 fw-bold mb-10 lh-1 text-truncate" style="max-width: 150px;" title="@(ViewBag.Card_Expensive?.ProductName)">
+                            @(ViewBag.Card_Expensive?.ProductName)
+                        </h2>
+                        <div class="d-inline-block" style="margin-bottom: 1px;">
+                            <span class="d-flex align-content-center gap-1 bg-primary border-white rounded-1" style="padding: 3px 5px;">
+                                <i class="material-symbols-outlined fs-14 text-white">diamond</i>
+                                <span class="lh-1 fs-14 text-white">Premium</span>
+                            </span>
+                        </div>
+                        <p class="mb-0 fs-14">
+                            Fiyat:
+                            <strong>@(((decimal?)ViewBag.Card_Expensive?.Price ?? 0).ToString("C2"))</strong>
+                        </p>
+                    </div>
+                    <div class="flex-shrink-0 ms-3 position-relative" style="width: 170px;">
+                        <div class="w-100 position-absolute top-50 translate-middle-y" style="right: -8px;">
+                            <div id="sales_chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xxl-3 col-xxxxl-6">
+            <div class="card bg-white p-20 py-30 rounded-10 border border-white mb-4 position-relative z-1">
+                <div class="d-flex">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-10 lh-1 fs-14 text-body">En Ucuz Ürün</h3>
+                        <h2 class="fs-20 fw-bold mb-10 lh-1 text-truncate" style="max-width: 150px;" title="@(ViewBag.Card_Cheapest?.ProductName)">
+                            @(ViewBag.Card_Cheapest?.ProductName)
+                        </h2>
+                        <div class="d-inline-block" style="margin-bottom: 1px;">
+                            <span class="d-flex align-content-center gap-1 bg-warning border-white rounded-1" style="padding: 3px 5px;">
+                                <i class="material-symbols-outlined fs-14 text-white">sell</i>
+                                <span class="lh-1 fs-14 text-white">Ekonomik</span>
+                            </span>
+                        </div>
+                        <p class="mb-0 fs-14">
+                            Fiyat:
+                            <strong>@(((decimal?)ViewBag.Card_Cheapest?.Price ?? 0).ToString("C2"))</strong>
+                        </p>
+                    </div>
+                    <div class="flex-shrink-0 ms-3 position-relative" style="width: 155px;">
+                        <div class="w-100 position-absolute top-50 translate-middle-y" style="right: -8px;">
+                            <div id="payment_profit_chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="row">
+        <div class="col-xxl-7 col-xxxxxl-12">
+            <div class="card bg-white p-20 rounded-10 border border-white mb-4">
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-20">
+                    <h3>Revenue Vs Operating Margin</h3>
+
+                    <div class="dropdown select-dropdown without-border ms-1">
+                        <button class="dropdown-toggle bg-transparent text-secondary fs-15" data-bs-toggle="dropdown" aria-expanded="false">
+                            This Year
+                        </button>
+
+                        <ul class="dropdown-menu dropdown-menu-end bg-white border-0 box-shadow rounded-10" data-simplebar>
+                            <li>
+                                <button class="dropdown-item text-secondary">This Day</button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item text-secondary">This Week</button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item text-secondary">This Month</button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item text-secondary">This Year</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="margin: -24px -25px -14px -25px;">
+                    <div id="revenue_vs_operating_margin_chart2"></div>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="col-xxl-5 col-xxxxxl-12">
+            <div class="card bg-white p-20 rounded-10 border border-white mb-4">
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-20">
+                    <h3>Marketing Expenses</h3>
+
+                    <div class="dropdown select-dropdown without-border ms-1">
+                        <button class="dropdown-toggle bg-transparent text-secondary fs-15" data-bs-toggle="dropdown" aria-expanded="false">
+                            Last Year
+                        </button>
+
+                        <ul class="dropdown-menu dropdown-menu-end bg-white border-0 box-shadow rounded-10" data-simplebar>
+                            <li>
+                                <button class="dropdown-item text-secondary">Last Day</button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item text-secondary">Last Week</button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item text-secondary">Last Month</button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item text-secondary">Last Year</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row align-items-center">
+                    <div class="col-lg-7">
+                        <div class="position-relative z-1">
+                            <div id="marketing_expenses_chart2" style="height: 416px;"></div>
+                            <div class="position-absolute top-50 start-50 translate-middle text-center">
+                                <span class="fs-28 fw-bold text-secondary d-block">@totalOrders.ToString("N0")</span>
+                                <span class="fs-14 text-muted">Toplam Sipariş</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-5">
+                        <div class="p-3 border-dashed-right border-border-color-50 rounded-10 mb-4" style="border: 1px dashed;">
+                            <h4 class="fs-14 fw-normal text-secondary mb-3">Kategori Dağılımı</h4>
+
+                            <ul class="ps-0 mb-0 list-unstyled last-child-none">
+                                @if (pieData != null)
+                                {
+                                    int i = 0;
+                                    foreach (var item in pieData)
+                                    {
+                                        // Renk sırası
+                                        string color = colors[i % colors.Length];
+
+                                        // Yüzdelik Hesaplama
+                                        double percent = totalOrders > 0 ? ((double)item.value / totalOrders) * 100 : 0;
+
+                                        <li class="d-flex align-items-center mb-2 justify-content-between">
+                                            <div class="d-flex align-items-center">
+                                                <span class="d-block rounded-pill position-relative top-1" style="width: 24px; height: 6px; background-color: @color;"></span>
+                                                <span class="ms-2 fw-normal fs-14">@item.name</span>
+                                            </div>
+                                            <span class="fs-14 fw-bold text-secondary">
+                                                @item.value <span class="text-muted fw-normal ms-1">(%@Math.Round(percent, 0))</span>
+                                            </span>
+                                        </li>
+                                        i++;
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <div class="row">
+        <div class="col-lg-7">
+            <div class="card bg-white p-20 rounded-10 border border-white mb-4">
+                <h3 class="mb-20">Active Students</h3>
+                <div class="d-flex flex-wrap gap-2 justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <span class="d-block fs-16">Monthly</span>
+                            <h2 class="fs-26 fw-medium mb-0" style="margin-top: 5px;">1,705</h2>
+                        </div>
+                        <span class="d-flex align-content-center gap-1 bg-success bg-opacity-10 border border-success ms-30" style="padding: 3px 5px;">
+                            <i class="material-symbols-outlined fs-14 text-success">trending_up</i>
+                            <span class="lh-1 fs-14 text-success">4.75%</span>
+                        </span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <span class="d-block fs-16">Weekly</span>
+                            <h2 class="fs-26 fw-medium mb-0" style="margin-top: 5px;">450</h2>
+                        </div>
+                        <span class="d-flex align-content-center gap-1 bg-danger bg-opacity-10 border border-danger ms-30" style="padding: 3px 5px;">
+                            <i class="material-symbols-outlined fs-14 text-danger">trending_down</i>
+                            <span class="lh-1 fs-14 text-danger">1.05%</span>
+                        </span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <span class="d-block fs-16">Daily</span>
+                            <h2 class="fs-26 fw-medium mb-0" style="margin-top: 5px;">260</h2>
+                        </div>
+                        <span class="d-flex align-content-center gap-1 bg-success bg-opacity-10 border border-success ms-30" style="padding: 3px 5px;">
+                            <i class="material-symbols-outlined fs-14 text-success">trending_up</i>
+                            <span class="lh-1 fs-14 text-success">1.25%</span>
+                        </span>
+                    </div>
+                </div>
+                <div id="category_price_analysis_chart"></div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+        <div class="col-lg-5">
+            <div class="card bg-white p-20 rounded-10 border border-white mb-4">
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-20">
+                    <h3>En Çok Satan Kategoriler</h3>
+                    <div class="dropdown select-dropdown without-border">
+                        <button class="dropdown-toggle bg-transparent text-secondary fs-15" data-bs-toggle="dropdown" aria-expanded="false">
+                            Tüm Zamanlar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="default-table-area without-header table-courses-categories">
+                    <div class="table-responsive">
+                        <table class="table align-middle">
+                            <tbody>
+                                @if (ViewBag.TopCategoriesTable != null)
+                                {
+                                    int imgIndex = 1;
+                                    foreach (var item in ViewBag.TopCategoriesTable)
+                                    {
+                                        // Resimlerin sırayla dönmesi için (course1.jpg ... course6.jpg)
+                                        string imgName = "course" + ((imgIndex % 6) + 1) + ".jpg";
+                                        imgIndex++;
+
+                                        <tr>
+                                            <td class="ps-0">
+                                                <a href="#" class="d-flex align-items-center text-decoration-none">
+                                                    <div class="flex-shrink-0">
+                                                        <img src="https://templates.envytheme.com/fila/assets/images/gallery3.jpg" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;" alt="category">
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-12">
+                                                        <h3 class="fw-normal hover-text">@item.CategoryName</h3>
+                                                        <span class="fs-14 text-body fw-normal">@item.ProductCount+ Ürün</span>
+                                                    </div>
+                                                </a>
+                                            </td>
+                                            <td class="text-body text-end">
+                                                <div class="d-flex flex-column align-items-end">
+                                                    <span class="fw-bold text-dark">@item.OrderCount Sipariş</span>
+                                                    <span class="fs-13 text-success">@item.TotalRevenue.ToString("C0")</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <a href="#" class="text-body hover-bg text-decoration-none fw-normal d-inline-block text-center border" style="width: 35px; height: 35px; border-radius: 3px;">
+                                                    <i class="material-symbols-outlined fs-20" style="line-height: 35px;">east</i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="d-flex justify-content-center justify-content-sm-between align-items-center text-center flex-wrap gap-2 showing-wrap pt-15">
+                        <span class="fs-15">İlk 6 Kayıt Gösteriliyor</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    
+    
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+        const chartId = document.getElementById('revenue_vs_operating_margin_chart2');
+
+        if (chartId) {
+            // 1. Controller'dan Gelen Veriler
+            var categories = @Html.Raw(Json.Serialize(ViewBag.Categories));
+            var revenueData = @Html.Raw(Json.Serialize(ViewBag.Revenues));
+            var orderCountData = @Html.Raw(Json.Serialize(ViewBag.OrderCounts));
+
+            var options = {
+                series: [{
+                    name: 'Toplam Ciro',
+                    type: 'column',
+                    data: revenueData
+                }, {
+                    name: 'Sipariş Adedi',
+                    type: 'line',
+                    data: orderCountData
+                }],
+                chart: {
+                    height: 400,
+                    type: 'line',
+                    toolbar: { show: false },
+                    zoom: { enabled: false }
+                },
+                // Renk Paleti: Ciro için Koyu Mavi/Mor, Adet için Canlı Turkuaz
+                colors: ['#556ee6', '#34c38f'],
+
+                // Görsel Stil Ayarları
+                stroke: {
+                    width: [0, 5], // Sütunda çizgi yok, Çizgi grafiği 5px kalınlığında
+                    curve: 'smooth', // Yumuşak kıvrımlar
+                    dashArray: [0, 0]
+                },
+                plotOptions: {
+                    bar: {
+                        columnWidth: '35%', // Sütunları incelttik (Daha kibar durur)
+                        borderRadius: 6,    // Köşeleri yuvarladık
+                        dataLabels: {
+                            position: 'top', // Yazılar üstte
+                        },
+                    }
+                },
+                // Sütunlara Gradient (Renk Geçişi) Efekti
+                fill: {
+                    opacity: [0.85, 1],
+                    type: ['gradient', 'solid'],
+                    gradient: {
+                        inverseColors: false,
+                        shade: 'light',
+                        type: "vertical",
+                        opacityFrom: 0.85,
+                        opacityTo: 0.55,
+                        stops: [0, 100, 100, 100]
+                    }
+                },
+                // Çizgi üzerindeki noktalar (Markers)
+                markers: {
+                    size: 5,
+                    colors: ['#fff'],
+                    strokeColors: '#34c38f',
+                    strokeWidth: 3,
+                    hover: {
+                        size: 7,
+                    }
+                },
+                dataLabels: {
+                    enabled: false, // Kalabalık görünmemesi için kapalı (Tooltip yetiyor)
+                },
+                legend: {
+                    show: true,
+                    position: 'top',
+                    horizontalAlign: 'right',
+                    fontSize: '14px',
+                    fontFamily: 'Outfit',
+                    offsetY: -20
+                },
+                grid: {
+                    borderColor: '#f1f1f1',
+                    strokeDashArray: 4, // Izgarayı kesikli yaptık
+                },
+                xaxis: {
+                    categories: categories,
+                    axisBorder: { show: false },
+                    axisTicks: { show: false },
+                    labels: {
+                        rotate: -45,
+                        style: {
+                            colors: '#919aa3',
+                            fontSize: '12px',
+                            fontFamily: 'Outfit',
+                        }
+                    }
+                },
+                // ÇİFT EKSEN AYARI (EN ÖNEMLİ KISIM)
+                yaxis: [
+                    {
+                        // SOL EKSEN (PARA)
+                        title: {
+                            text: 'Toplam Ciro (TL)',
+                            style: { color: '#556ee6', fontWeight: 600 }
+                        },
+                        labels: {
+                            style: { colors: '#556ee6' },
+                            formatter: function (val) {
+                                // Binlik kısaltma (10k, 25k gibi)
+                                return val >= 1000 ? (val / 1000).toFixed(0) + "k ₺" : val;
+                            }
+                        }
+                    },
+                    {
+                        // SAĞ EKSEN (ADET)
+                        opposite: true, // Sağ tarafa al
+                        title: {
+                            text: 'Sipariş Sayısı',
+                            style: { color: '#34c38f', fontWeight: 600 }
+                        },
+                        labels: {
+                            style: { colors: '#34c38f' },
+                            formatter: function (val) {
+                                return val.toFixed(0); // Ondalık gösterme
+                            }
+                        }
+                    }
+                ],
+                // TOOLTIP (Üzerine Gelince)
+                tooltip: {
+                    shared: true,
+                    intersect: false,
+                    theme: 'light',
+                    y: {
+                        formatter: function (y, { seriesIndex }) {
+                            if(seriesIndex === 0) {
+                                // Ciro Formatı
+                                return y.toLocaleString('tr-TR', { style: 'currency', currency: 'TRY' });
+                            } else {
+                                // Adet Formatı
+                                return y + " Adet";
+                            }
+                        }
+                    }
+                }
+            };
+
+            var chart = new ApexCharts(document.querySelector("#revenue_vs_operating_margin_chart2"), options);
+            chart.render();
+
+            window.addEventListener('resize', () => {
+                chart.resize();
+            });
+        }
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var chartDom = document.getElementById('marketing_expenses_chart2');
+        if (chartDom) {
+            var myChart = echarts.init(chartDom, null, {
+                renderer: 'canvas',
+                useDirtyRect: false
+            });
+
+            // C#'tan gelen veri ve renkleri JS'e aktar
+            var dataFromDb = @Html.Raw(Json.Serialize(pieData));
+            var colors = @Html.Raw(Json.Serialize(colors));
+
+            var option = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: '{b}: {c} ({d}%)'
+                },
+                // Legend (Alt yazı) KAPALI
+                legend: {
+                    show: false
+                },
+                color: colors,
+                series: [
+                    {
+                        name: 'Kategori',
+                        type: 'pie',
+                        radius: ['55%', '85%'], // Halka kalınlığı
+                        avoidLabelOverlap: false,
+
+                        // Chart üzerindeki etiketler KAPALI
+                        label: {
+                            show: false,
+                            position: 'center'
+                        },
+                        emphasis: {
+                            label: {
+                                show: false
+                            }
+                        },
+                        labelLine: {
+                            show: false
+                        },
+                        data: dataFromDb
+                    }
+                ]
+            };
+
+            if (option && typeof option === 'object') {
+                myChart.setOption(option);
+            }
+
+            window.addEventListener('resize', myChart.resize);
+        }
+    });
+</script>
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+        const chartId = document.getElementById('category_price_analysis_chart');
+
+        if (chartId) {
+            // Verileri Al
+            var categories = @Html.Raw(Json.Serialize(ViewBag.CatNames));
+            var maxPrices = @Html.Raw(Json.Serialize(ViewBag.MaxPrices));
+            var minPrices = @Html.Raw(Json.Serialize(ViewBag.MinPrices));
+            var avgPrices = @Html.Raw(Json.Serialize(ViewBag.AvgPrices));
+            var maxNames = @Html.Raw(Json.Serialize(ViewBag.MaxProductNames));
+            var minNames = @Html.Raw(Json.Serialize(ViewBag.MinProductNames));
+
+            var options = {
+                series: [
+                    {
+                        name: "En Pahalı",
+                        type: "column",
+                        data: maxPrices
+                    },
+                    {
+                        name: "Ortalama",
+                        type: "area",
+                        data: avgPrices
+                    },
+                    {
+                        name: "En Ucuz",
+                        type: "line",
+                        data: minPrices
+                    }
+                ],
+                chart: {
+                    height: 460,
+                    type: "line",
+                    stacked: false,
+                    toolbar: { show: false }
+                },
+                stroke: {
+                    width: [0, 2, 4], // Çizgi kalınlıkları
+                    curve: "smooth"
+                },
+                plotOptions: {
+                    bar: {
+                        columnWidth: "40%",
+                        borderRadius: 4
+                    }
+                },
+                colors: ['#556ee6', '#f1b44c', '#34c38f'], // Mavi (Pahalı), Sarı (Ort), Yeşil (Ucuz)
+
+                fill: {
+                    opacity: [1, 0.4, 1], // Sütun tam, Alan yarım saydam, Çizgi tam
+                    gradient: {
+                        inverseColors: false,
+                        shade: "light",
+                        type: "vertical",
+                        opacityFrom: 0.85,
+                        opacityTo: 0.55,
+                    }
+                },
+                xaxis: {
+                    categories: categories,
+                    axisBorder: { show: false },
+                    axisTicks: { show: false },
+                    labels: {
+                        rotate: -45,
+                        style: { colors: "#919aa3", fontSize: "12px", fontFamily: 'Outfit' }
+                    }
+                },
+                // --- KRİTİK NOKTA: LOGARİTMİK ÖLÇEK ---
+                yaxis: {
+                    logarithmic: true, // BU SATIR SAYESİNDE KÜÇÜK DEĞERLER EZİLMEZ
+                    tickAmount: 5,     // Y ekseninde kaç basamak olsun
+                    min: 1,            // Logaritmik ölçek 0 olamaz, en az 1 yapıyoruz
+                    labels: {
+                        formatter: function (value) {
+                            // Değerleri okunaklı hale getir (10k, 1k gibi)
+                            if(value >= 1000) return (value / 1000).toFixed(1) + "k ₺";
+                            return value.toFixed(0) + " ₺";
+                        },
+                        style: { colors: "#919aa3", fontSize: "12px", fontFamily: 'Outfit' }
+                    }
+                },
+                tooltip: {
+                    shared: true,
+                    intersect: false,
+                    theme: 'light',
+                    custom: function({series, seriesIndex, dataPointIndex, w}) {
+                        var catName = categories[dataPointIndex];
+                        var maxP = maxPrices[dataPointIndex].toLocaleString('tr-TR');
+                        var minP = minPrices[dataPointIndex].toLocaleString('tr-TR');
+                        var avgP = avgPrices[dataPointIndex].toLocaleString('tr-TR');
+
+                        var maxN = maxNames[dataPointIndex];
+                        var minN = minNames[dataPointIndex];
+
+                        return `
+                            <div style="padding: 12px; background: #fff; border: 1px solid #eee; border-radius: 6px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); font-family: 'Outfit', sans-serif;">
+                                <div style="font-weight: 600; font-size: 14px; margin-bottom: 8px; border-bottom: 1px solid #f1f1f1; padding-bottom: 5px;">
+                                    ${catName}
+                                </div>
+
+                                <div style="display: flex; align-items: center; margin-bottom: 5px;">
+                                    <span style="width: 8px; height: 8px; background: #556ee6; border-radius: 50%; margin-right: 6px;"></span>
+                                    <span style="font-size: 12px; color: #555; width: 60px;">En Pahalı:</span>
+                                    <strong style="font-size: 13px; color: #333;">${maxP} ₺</strong>
+                                </div>
+                                <div style="font-size: 11px; color: #888; margin-left: 14px; margin-bottom: 8px;">
+                                    ${maxN}
+                                </div>
+
+                                <div style="display: flex; align-items: center; margin-bottom: 5px;">
+                                    <span style="width: 8px; height: 8px; background: #34c38f; border-radius: 50%; margin-right: 6px;"></span>
+                                    <span style="font-size: 12px; color: #555; width: 60px;">En Ucuz:</span>
+                                    <strong style="font-size: 13px; color: #333;">${minP} ₺</strong>
+                                </div>
+                                <div style="font-size: 11px; color: #888; margin-left: 14px; margin-bottom: 8px;">
+                                    ${minN}
+                                </div>
+
+                                <div style="display: flex; align-items: center;">
+                                    <span style="width: 8px; height: 8px; background: #f1b44c; border-radius: 50%; margin-right: 6px;"></span>
+                                    <span style="font-size: 12px; color: #555; width: 60px;">Ortalama:</span>
+                                    <strong style="font-size: 13px; color: #333;">${avgP} ₺</strong>
+                                </div>
+                            </div>
+                        `;
+                    }
+                },
+                legend: {
+                    show: true,
+                    position: "top",
+                    horizontalAlign: 'right'
+                },
+                grid: {
+                    strokeDashArray: 5,
+                    borderColor: "#e0e0e0"
+                }
+            };
+
+            const chart = new ApexCharts(document.querySelector('#category_price_analysis_chart'), options);
+            chart.render();
+
+            window.addEventListener('resize', () => { chart.resize(); });
+        }
+    });
+</script>
+

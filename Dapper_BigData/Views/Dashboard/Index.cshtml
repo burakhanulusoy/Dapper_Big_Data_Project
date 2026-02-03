@@ -2,6 +2,8 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/UI/Index.cshtml";
 }
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons/css/flag-icons.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap/dist/css/jsvectormap.min.css" />
 
 
 <div class="main-content-container overflow-hidden">
@@ -11,8 +13,10 @@
                 <div class="position-relative border-end-custom pe-10">
                     <div class="d-sm-flex align-items-center">
                         <div class="flex-grow-1">
-                            <h3 class="mb-10">New Users</h3>
-                            <h2 class="fs-26 fw-medium mb-0 lh-1">705</h2>
+                            <h3 class="mb-10">En Yüksek Sipariş</h3>
+                            <h2 class="fs-26 fw-medium mb-0 lh-1">
+                                @(((decimal)ViewBag.Stats_MaxOrderPrice).ToString("C2"))
+                            </h2>
                         </div>
                         <div class="flex-shrink-0" style="margin-bottom: -25px;">
                             <div id="new_user_chart" class="chart-position"></div>
@@ -20,74 +24,98 @@
                     </div>
                     <div class="d-flex justify-content-between align-items-center" style="margin-top: 25px;">
                         <span class="d-flex align-content-center gap-1 bg-success bg-opacity-10 border border-success" style="padding: 3px 5px;">
-                            <i class="material-symbols-outlined fs-14 text-success">trending_up</i>
-                            <span class="lh-1 fs-14 text-success">2.15%</span>
+                            <i class="material-symbols-outlined fs-14 text-success">monetization_on</i>
+                            <span class="lh-1 fs-14 text-success">Tek Seferde</span>
                         </span>
-                        <p class="mb-0 fs-14 pe-3 d-block" style="margin-top: 2px;">This Week</p>
+                        <p class="mb-0 fs-14 pe-3 d-block" style="margin-top: 2px;">Rekor Satış</p>
                     </div>
                 </div>
             </div>
+
             <div class="col-xxl-3 col-md-6 col-xxxl-6">
                 <div class="position-relative border-end-custom pe-10">
                     <div class="d-sm-flex align-items-center">
                         <div class="flex-grow-1">
-                            <h3 class="mb-10">Active Users</h3>
-                            <h2 class="fs-26 fw-medium mb-0 lh-1">94,817</h2>
+                            <h3 class="mb-10">En Çok Satan Ürün</h3>
+                            <h2 class="fs-24 fw-medium mb-0 lh-1">
+                                @if (ViewBag.Stats_BestProduct != null)
+                                {
+                                    @ViewBag.Stats_BestProduct.ProductName
+                                }
+                                else
+                                {
+                                    <span class="fs-18">Veri Yok</span>
+                                }
+                            </h2>
                         </div>
                         <div class="flex-shrink-0" style="margin-bottom: -25px;">
                             <div id="active_user_chart" class="chart-position"></div>
                         </div>
                     </div>
                     <div class="d-flex justify-content-between align-items-center" style="margin-top: 25px;">
-                        <span class="d-flex align-content-center gap-1 bg-success bg-opacity-10 border border-success" style="padding: 3px 5px;">
-                            <i class="material-symbols-outlined fs-14 text-success">trending_up</i>
-                            <span class="lh-1 fs-14 text-success">8.75%</span>
+                        <span class="d-flex align-content-center gap-1 bg-primary bg-opacity-10 border border-primary" style="padding: 3px 5px;">
+                            <i class="material-symbols-outlined fs-14 text-primary">category</i>
+                            <span class="lh-1 fs-14 text-primary">
+                                @if (ViewBag.Stats_BestProduct != null)
+                                {
+                                    @ViewBag.Stats_BestProduct.CategoryName
+                                }
+                            </span>
                         </span>
-                        <p class="mb-0 fs-14 pe-3 d-block" style="margin-top: 2px;">This Month</p>
+                        <p class="mb-0 fs-14 pe-3 d-block" style="margin-top: 2px;">Kategorisi</p>
                     </div>
                 </div>
             </div>
+
             <div class="col-xxl-3 col-md-6 col-xxxl-6">
                 <div class="position-relative border-end-custom pe-10">
                     <div class="d-sm-flex align-items-center">
                         <div class="flex-grow-1">
-                            <h3 class="mb-10">Lead Conversation</h3>
-                            <h2 class="fs-26 fw-medium mb-0 lh-1">25.99%</h2>
+                            <h3 class="mb-10">Favori Kategori</h3>
+                            <h2 class="fs-26 fw-medium mb-0 lh-1">
+                                @ViewBag.Stats_BestCategory
+                            </h2>
                         </div>
                         <div class="flex-shrink-0" style="margin-bottom: -25px;">
                             <div id="lead_conversation_chart" class="chart-position"></div>
                         </div>
                     </div>
                     <div class="d-flex justify-content-between align-items-center" style="margin-top: 25px;">
-                        <span class="d-flex align-content-center gap-1 bg-danger bg-opacity-10 border border-danger" style="padding: 3px 5px;">
-                            <i class="material-symbols-outlined fs-14 text-danger">trending_down</i>
-                            <span class="lh-1 fs-14 text-danger">1.25%</span>
+                        <span class="d-flex align-content-center gap-1 bg-warning bg-opacity-10 border border-warning" style="padding: 3px 5px;">
+                            <i class="material-symbols-outlined fs-14 text-warning">star</i>
+                            <span class="lh-1 fs-14 text-warning">Top 1</span>
                         </span>
-                        <p class="mb-0 fs-14 pe-3 d-block" style="margin-top: 2px;">Last Week</p>
+                        <p class="mb-0 fs-14 pe-3 d-block" style="margin-top: 2px;">En Çok İlgi Gören</p>
                     </div>
                 </div>
             </div>
+
             <div class="col-xxl-3 col-md-6 col-xxxl-6">
                 <div class="position-relative pe-10">
                     <div class="d-sm-flex align-items-center">
                         <div class="flex-grow-1">
-                            <h3 class="mb-10">Revenue Growth</h3>
-                            <h2 class="fs-26 fw-medium mb-0 lh-1">$1,207</h2>
+                            <h3 class="mb-10">Ödeme Yöntemi</h3>
+                            <h2 class="fs-26 fw-medium mb-0 lh-1">
+                                @ViewBag.Stats_PaymentMethod
+                            </h2>
                         </div>
                         <div class="flex-shrink-0" style="margin-bottom: -25px;">
                             <div id="revenue_growth_chart" class="chart-position" style="bottom: -8px;"></div>
                         </div>
                     </div>
                     <div class="d-flex justify-content-between align-items-center" style="margin-top: 25px;">
-                        <span class="d-flex align-content-center gap-1 bg-success bg-opacity-10 border border-success" style="padding: 3px 5px;">
-                            <i class="material-symbols-outlined fs-14 text-success">trending_up</i>
-                            <span class="lh-1 fs-14 text-success">20.75%</span>
+                        <span class="d-flex align-content-center gap-1 bg-info bg-opacity-10 border border-info" style="padding: 3px 5px;">
+                            <i class="material-symbols-outlined fs-14 text-info">payments</i>
+                            <span class="lh-1 fs-14 text-info">Popüler</span>
                         </span>
-                        <p class="mb-0 fs-14 pe-3 d-block" style="margin-top: 2px;">Weekly Growth</p>
+                        <p class="mb-0 fs-14 pe-3 d-block" style="margin-top: 2px;">En Sık Kullanılan</p>
                     </div>
                 </div>
             </div>
         </div>
+    
+    
+    
     </div>
     <div class="row">
         <div class="col-xxl-4 col-xxxl-6">
@@ -120,53 +148,37 @@
                 <div class="text-center">
                     <div id="most_leads_chart2" style="max-width: 305px; margin: auto;"></div>
                 </div>
-
                 <ul class="p-0 mb-0 list-unstyled last-child-none icon-bg">
-                    <li class="d-flex justify-content-between align-items-center border-border-color pb-10 mb-10" style="border-bottom: 1px dashed;">
-                        <div class="d-flex align-items-center">
-                            <div class="text-center rounded-circle" style="width: 50px; height: 50px; background-color: #f4f6fc;">
-                                <i class="material-symbols-outlined fs-24 text-primary position-relative" style="line-height: 50px; left: -2px;">share</i>
-                            </div>
-                            <span class="ms-12 fs-16 text-secondary fw-medium">Social</span>
-                        </div>
-                        <span class="fs-16">9,562</span>
-                        <span class="fs-16">30%</span>
-                    </li>
-                    <li class="d-flex justify-content-between align-items-center border-border-color pb-10 mb-10" style="border-bottom: 1px dashed;">
-                        <div class="d-flex align-items-center">
-                            <div class="text-center rounded-circle" style="width: 50px; height: 50px; background-color: #f4f6fc;">
-                                <i class="material-symbols-outlined fs-24 text-info" style="line-height: 50px;">email</i>
-                            </div>
-                            <span class="ms-12 fs-16 text-secondary fw-medium">Email</span>
-                        </div>
-                        <span class="fs-16">18,426</span>
-                        <span class="fs-16">55%</span>
-                    </li>
-                    <li class="d-flex justify-content-between align-items-center border-border-color pb-10 mb-10" style="border-bottom: 1px dashed;">
-                        <div class="d-flex align-items-center">
-                            <div class="text-center rounded-circle" style="width: 50px; height: 50px; background-color: #f4f6fc;">
-                                <i class="material-symbols-outlined fs-24 text-primary-50" style="line-height: 50px;">call</i>
-                            </div>
-                            <span class="ms-12 fs-16 text-secondary fw-medium">Call</span>
-                        </div>
-                        <span class="fs-16">4,753</span>
-                        <span class="fs-16">10%</span>
-                    </li>
-                    <li class="d-flex justify-content-between align-items-center border-border-color pb-10 mb-10" style="border-bottom: 1px dashed;">
-                        <div class="d-flex align-items-center">
-                            <div class="text-center rounded-circle" style="width: 50px; height: 50px; background-color: #f4f6fc;">
-                                <i class="material-symbols-outlined fs-24 text-warning" style="line-height: 50px;">category</i>
-                            </div>
-                            <span class="ms-12 fs-16 text-secondary fw-medium">Others</span>
-                        </div>
-                        <span class="fs-16">2,657</span>
-                        <span class="fs-16">5%</span>
-                    </li>
+                    @if (ViewBag.TopCountries != null)
+                    {
+                        foreach (var item in ViewBag.TopCountries)
+                        {
+                            <li class="d-flex justify-content-between align-items-center border-border-color pb-10 mb-10" style="border-bottom: 1px dashed;">
+                                <div class="d-flex align-items-center">
+                                    <div class="text-center rounded-circle flex-shrink-0"
+                                         style="width: 50px; height: 50px; background-color: #f4f6fc; display: flex; align-items: center; justify-content: center;">
+                                        <img src="@item.FlagUrl"
+                                             class="rounded-circle"
+                                             style="width: 30px; height: 30px; object-fit: cover; box-shadow: 0 2px 5px rgba(0,0,0,0.1);"
+                                             alt="@item.CountryName">
+                                    </div>
+
+                                    <span class="ms-3 fs-16 text-secondary fw-medium">@item.CountryName</span>
+                                </div>
+
+                                <span class="fs-16 fw-bold">@item.Count.ToString("N0")</span>
+
+                                <span class="fs-16 text-muted">@Math.Round((double)item.Ratio, 0)%</span>
+                            </li>
+                        }
+                    }
                 </ul>
-           
-            
+
             </div>
         </div>
+
+
+
         <div class="col-xxl-4 col-xxxl-6">
             <div class="card bg-white p-20 rounded-10 border border-white mb-4">
                 <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-20">
@@ -195,82 +207,61 @@
                 </div>
 
                 <div class="text-center mb-3">
-                    <div id="country_stats_map" style="height: 284px;"></div>
+                    <div id="country_stats_map2" style="height: 284px;"></div>
                 </div>
-
                 <div class="default-table-area mx-minus-1 country-stats-table">
                     <div class="table-responsive">
                         <table class="table align-middle">
                             <thead>
                                 <tr>
-                                    <th scope="col" class="bg-transparent py-0 ps-0">Country</th>
-                                    <th scope="col" class="bg-transparent py-0">User</th>
-                                    <th scope="col" class="bg-transparent py-0 pe-0">Bounce Rate</th>
+                                    <th scope="col" class="bg-transparent py-0 ps-0">Ülke</th>
+                                    <th scope="col" class="bg-transparent py-0">Kullanıcı</th>
+                                    <th scope="col" class="bg-transparent py-0 pe-0">Oran</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="ps-0">
-                                        <div class="d-flex align-items-center text-decoration-none">
-                                            <div class="flex-shrink-0">
-                                                <img src="assets/images/usa.png" class="rounded-circle" style="width: 20px; height: 20px;" alt="usa">
-                                            </div>
-                                            <div class="flex-grow-1 ms-2">
-                                                <h3 class="fw-medium mb-0 fs-16 position-relative top-2">United States</h3>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="text-body fw-normal">17003</td>
-                                    <td class="text-body fw-normal pe-0">0.83%</td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-0">
-                                        <div class="d-flex align-items-center text-decoration-none">
-                                            <div class="flex-shrink-0">
-                                                <img src="assets/images/china.png" class="rounded-circle" style="width: 20px; height: 20px;" alt="china">
-                                            </div>
-                                            <div class="flex-grow-1 ms-2">
-                                                <h3 class="fw-medium mb-0 fs-16 position-relative top-2">China</h3>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="text-body fw-normal">16843</td>
-                                    <td class="text-body fw-normal pe-0">0.75%</td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-0">
-                                        <div class="d-flex align-items-center text-decoration-none">
-                                            <div class="flex-shrink-0">
-                                                <img src="assets/images/germany.png" class="rounded-circle" style="width: 20px; height: 20px;" alt="germany">
-                                            </div>
-                                            <div class="flex-grow-1 ms-2">
-                                                <h3 class="fw-medium mb-0 fs-16 position-relative top-2">Germany</h3>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="text-body fw-normal">14285</td>
-                                    <td class="text-body fw-normal pe-0">0.49%</td>
-                                </tr>
-                                <tr class="last-child-border-none">
-                                    <td class="ps-0">
-                                        <div class="d-flex align-items-center text-decoration-none">
-                                            <div class="flex-shrink-0">
-                                                <img src="assets/images/australia.png" class="rounded-circle" style="width: 20px; height: 20px;" alt="australia">
-                                            </div>
-                                            <div class="flex-grow-1 ms-2">
-                                                <h3 class="fw-medium mb-0 fs-16 position-relative top-2">Australia</h3>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="text-body fw-normal">9573</td>
-                                    <td class="text-body fw-normal pe-0">0.18%</td>
-                                </tr>
+                                @if (ViewBag.LeastCountries != null)
+                                {
+                                    foreach (var item in ViewBag.LeastCountries)
+                                    {
+                                        <tr>
+                                            <td class="ps-0">
+                                                <div class="d-flex align-items-center text-decoration-none">
+                                                    <div class="flex-shrink-0">
+                                                        <img src="@item.FlagUrl"
+                                                             class="rounded-circle"
+                                                             style="width: 20px; height: 20px; object-fit: cover; border: 1px solid #eee;"
+                                                             alt="@item.CountryName">
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-2">
+                                                        <h3 class="fw-medium mb-0 fs-16 position-relative top-2">
+                                                            @item.CountryName
+                                                        </h3>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="text-body fw-normal">@item.Count</td>
+                                            <td class="text-body fw-normal pe-0">
+                                                % @Math.Round((double)item.Ratio, 2)
+                                            </td>
+                                        </tr>
+                                    }
+                                }
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
+
+
+
+
+
+
+
+
+
         <div class="col-xxl-4 col-xxxl-12">
             <div class="row">
                 <div class="col-xxxl-6 col-xxl-12">
@@ -297,7 +288,10 @@
                             </div>
                         </div>
 
-                        <div id="tasks_stats_chart" style="margin-bottom: -17px;"></div>
+                        <div id="tasks_stats_chart2" style="margin-bottom: -17px;"></div>
+                    
+                    
+                    
                     </div>
                 </div>
                 <div class="col-xxxl-6 col-xxl-12">
@@ -327,12 +321,26 @@
                             </div>
                         </div>
 
-                        <div id="earning_reports_chart" style="margin-bottom: -17px;"></div>
+                        <div id="earning_reports_chart2" style="margin-bottom: -17px;"></div>
+                    
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="row">
         <div class="col-lg-5">
             <div class="card bg-white p-20 rounded-10 border border-white mb-4">
@@ -360,138 +368,49 @@
                         </ul>
                     </div>
                 </div>
-
                 <div class="default-table-area without-header table-top-customers">
                     <div class="table-responsive">
                         <table class="table align-middle">
                             <tbody>
-                                <tr>
-                                    <td class="ps-0">
-                                        <div class="d-flex align-items-center text-decoration-none">
-                                            <div class="flex-shrink-0">
-                                                <img src="assets/images/user6.jpg" class="rounded-circle" style="width: 50px; height: 50px;" alt="user6">
-                                            </div>
-                                            <div class="flex-grow-1 ms-12">
-                                                <h3 class="fw-normal">Mark Stjohn</h3>
-                                                <span class="fs-14 text-body fw-normal">Customer ID #76431</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="customers.html" class="text-body hover-text text-decoration-none fw-normal">View Profile</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-0">
-                                        <div class="d-flex align-items-center text-decoration-none">
-                                            <div class="flex-shrink-0">
-                                                <img src="assets/images/user7.jpg" class="rounded-circle" style="width: 50px; height: 50px;" alt="user7">
-                                            </div>
-                                            <div class="flex-grow-1 ms-12">
-                                                <h3 class="fw-normal">Joan Stanley</h3>
-                                                <span class="fs-14 text-body fw-normal">Customer ID #64815</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="customers.html" class="text-body hover-text text-decoration-none fw-normal">View Profile</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-0">
-                                        <div class="d-flex align-items-center text-decoration-none">
-                                            <div class="flex-shrink-0">
-                                                <img src="assets/images/user8.jpg" class="rounded-circle" style="width: 50px; height: 50px;" alt="user8">
-                                            </div>
-                                            <div class="flex-grow-1 ms-12">
-                                                <h3 class="fw-normal">Jacob Bell</h3>
-                                                <span class="fs-14 text-body fw-normal">Customer ID #34581</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="customers.html" class="text-body hover-text text-decoration-none fw-normal">View Profile</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-0">
-                                        <div class="d-flex align-items-center text-decoration-none">
-                                            <div class="flex-shrink-0">
-                                                <img src="assets/images/user9.jpg" class="rounded-circle" style="width: 50px; height: 50px;" alt="user9">
-                                            </div>
-                                            <div class="flex-grow-1 ms-12">
-                                                <h3 class="fw-normal">Donald Bryan</h3>
-                                                <span class="fs-14 text-body fw-normal">Customer ID #67941</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="customers.html" class="text-body hover-text text-decoration-none fw-normal">View Profile</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-0">
-                                        <div class="d-flex align-items-center text-decoration-none">
-                                            <div class="flex-shrink-0">
-                                                <img src="assets/images/user10.jpg" class="rounded-circle" style="width: 50px; height: 50px;" alt="user10">
-                                            </div>
-                                            <div class="flex-grow-1 ms-12">
-                                                <h3 class="fw-normal">Kristina Blomquist</h3>
-                                                <span class="fs-14 text-body fw-normal">Customer ID #36985</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="customers.html" class="text-body hover-text text-decoration-none fw-normal">View Profile</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-0">
-                                        <div class="d-flex align-items-center text-decoration-none">
-                                            <div class="flex-shrink-0">
-                                                <img src="assets/images/user11.jpg" class="rounded-circle" style="width: 50px; height: 50px;" alt="user11">
-                                            </div>
-                                            <div class="flex-grow-1 ms-12">
-                                                <h3 class="fw-normal">Jeffrey Morrison</h3>
-                                                <span class="fs-14 text-body fw-normal">Customer ID #26985</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="customers.html" class="text-body hover-text text-decoration-none fw-normal">View Profile</a>
-                                    </td>
-                                </tr>
+                                @if (ViewBag.TopCustomers != null)
+                                {
+                                    foreach (var item in ViewBag.TopCustomers)
+                                    {
+                                        // Resim kontrolü
+                                        string imgUrl = string.IsNullOrEmpty(item.CustomerImageUrl) ? "assets/images/user1.jpg" : "https://plus.unsplash.com/premium_photo-1677252438411-9a930d7a5168?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+
+                                        <tr>
+                                            <td class="ps-0">
+                                                <div class="d-flex align-items-center text-decoration-none">
+                                                    <div class="flex-shrink-0">
+                                                        <img src="@imgUrl" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;" alt="user">
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-12">
+                                                        <h3 class="fw-normal">@item.CustomerName @item.CustomerSurname</h3>
+
+                                                        <span class="fs-14 text-body fw-normal">
+                                                            <i class="material-symbols-outlined fs-14 position-relative top-2 me-1">location_on</i>
+                                                            @item.City / @item.Country
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <a href="mailto:@item.Email" class="text-primary hover-text text-decoration-none fw-medium d-flex align-items-center justify-content-end">
+                                                    <i class="material-symbols-outlined fs-18 me-1">mail</i>
+                                                    Mail
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
                             </tbody>
                         </table>
                     </div>
-                    <div class="d-flex justify-content-center justify-content-sm-between align-items-center text-center flex-wrap gap-2 showing-wrap pt-15">
-                        <span class="fs-15">Showing 1 to 6 of 50 entries</span>
-
-                        <nav class="custom-pagination" aria-label="Page navigation example">
-                            <ul class="pagination mb-0 justify-content-center">
-                                <li class="page-item">
-                                    <button class="page-link icon" aria-label="Previous">
-                                        <i class="material-symbols-outlined">west</i>
-                                    </button>
-                                </li>
-                                <!-- <li class="page-item">
-                                    <button class="page-link active">1</button>
-                                </li>
-                                <li class="page-item">
-                                    <button class="page-link">2</button>
-                                </li>
-                                <li class="page-item">
-                                    <button class="page-link">3</button>
-                                </li> -->
-                                <li class="page-item">
-                                    <button class="page-link icon" aria-label="Next">
-                                        <i class="material-symbols-outlined">east</i>
-                                    </button>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
                 </div>
+            
+            
+            
             </div>
         </div>
         <div class="col-lg-7">
@@ -521,6 +440,7 @@
                     </div>
                 </div>
 
+
                 <div class="default-table-area mx-minus-1 table-recent-leads">
                     <div class="table-responsive">
                         <table class="table align-middle">
@@ -528,545 +448,91 @@
                                 <tr>
                                     <th scope="col" class="fw-medium">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="flexCheckDefault14">
+                                            <input class="form-check-input" type="checkbox" id="checkAll">
                                         </div>
                                     </th>
-                                    <th scope="col" class="fw-medium">Customer</th>
+                                    <th scope="col" class="fw-medium">Müşteri</th>
                                     <th scope="col" class="fw-medium">Email</th>
-                                    <th scope="col" class="fw-medium">Source</th>
-                                    <th scope="col" class="fw-medium">Status</th>
-                                    <th scope="col" class="fw-medium">Action</th>
+                                    <th scope="col" class="fw-medium">Ödeme Yöntemi</th>
+                                    <th scope="col" class="fw-medium">Durum</th>
+                                    <th scope="col" class="fw-medium text-end">Tutar</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="text-body" style="width: 62px;">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="flexCheckDefault2">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="customers.html" class="d-flex align-items-center text-decoration-none">
-                                            <div class="flex-shrink-0">
-                                                <img src="assets/images/user1.jpg" class="rounded-circle" style="width: 50px; height: 50px;" alt="user1">
-                                            </div>
-                                            <div class="flex-grow-1 ms-12">
-                                                <h3 class="fw-medium hover-text mb-0 fs-16">Carlos Daley</h3>
-                                            </div>
-                                        </a>
-                                    </td>
-                                    <td class="text-body">carlos@fila.com</td>
-                                    <td class="text-body">Website</td>
-                                    <td>
-                                        <span class="text-success bg-success bg-opacity-10 fs-15 fw-normal d-inline-block default-badge">New</span>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex justify-content-end" style="gap: 12px;">
-                                            <button class="bg-transparent p-0 border-0" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View">
-                                                <i class="material-symbols-outlined fs-16 fw-normal text-primary">visibility</i>
-                                            </button>
-                                            <button class="bg-transparent p-0 border-0 hover-text-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit Lead">
-                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">edit</i>
-                                            </button>
-                                            <button class="bg-transparent p-0 border-0 hover-text-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete">
-                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">delete</i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-body">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="flexCheckDefault3">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="customers.html" class="d-flex align-items-center text-decoration-none">
-                                            <div class="flex-shrink-0">
-                                                <img src="assets/images/user2.jpg" class="rounded-circle" style="width: 50px; height: 50px;" alt="user2">
-                                            </div>
-                                            <div class="flex-grow-1 ms-12">
-                                                <h3 class="fw-medium hover-text mb-0 fs-16">Dorothy Young</h3>
-                                            </div>
-                                        </a>
-                                    </td>
-                                    <td class="text-body">dorothy@fila.com</td>
-                                    <td class="text-body">Referral</td>
-                                    <td>
-                                        <span class="text-primary bg-primary bg-opacity-10 fs-15 fw-normal d-inline-block default-badge">Won</span>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex justify-content-end" style="gap: 12px;">
-                                            <button class="bg-transparent p-0 border-0" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View">
-                                                <i class="material-symbols-outlined fs-16 fw-normal text-primary">visibility</i>
-                                            </button>
-                                            <button class="bg-transparent p-0 border-0 hover-text-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit Lead">
-                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">edit</i>
-                                            </button>
-                                            <button class="bg-transparent p-0 border-0 hover-text-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete">
-                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">delete</i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-body">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="flexCheckDefault4">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="customers.html" class="d-flex align-items-center text-decoration-none">
-                                            <div class="flex-shrink-0">
-                                                <img src="assets/images/user3.jpg" class="rounded-circle" style="width: 50px; height: 50px;" alt="user3">
-                                            </div>
-                                            <div class="flex-grow-1 ms-12">
-                                                <h3 class="fw-medium hover-text mb-0 fs-16">Greg Woody</h3>
-                                            </div>
-                                        </a>
-                                    </td>
-                                    <td class="text-body">greg@fila.com</td>
-                                    <td class="text-body">Cold Call</td>
-                                    <td>
-                                        <span class="text-warning bg-warning bg-opacity-10 fs-15 fw-normal d-inline-block default-badge">In Progress</span>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex justify-content-end" style="gap: 12px;">
-                                            <button class="bg-transparent p-0 border-0" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View">
-                                                <i class="material-symbols-outlined fs-16 fw-normal text-primary">visibility</i>
-                                            </button>
-                                            <button class="bg-transparent p-0 border-0 hover-text-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit Lead">
-                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">edit</i>
-                                            </button>
-                                            <button class="bg-transparent p-0 border-0 hover-text-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete">
-                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">delete</i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-body">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="flexCheckDefault5">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="customers.html" class="d-flex align-items-center text-decoration-none">
-                                            <div class="flex-shrink-0">
-                                                <img src="assets/images/user4.jpg" class="rounded-circle" style="width: 50px; height: 50px;" alt="user4">
-                                            </div>
-                                            <div class="flex-grow-1 ms-12">
-                                                <h3 class="fw-medium hover-text mb-0 fs-16">Deborah Rosol</h3>
-                                            </div>
-                                        </a>
-                                    </td>
-                                    <td class="text-body">deborah@fila.com</td>
-                                    <td class="text-body">Email Campaign</td>
-                                    <td>
-                                        <span class="text-danger bg-danger bg-opacity-10 fs-15 fw-normal d-inline-block default-badge">Lost</span>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex justify-content-end" style="gap: 12px;">
-                                            <button class="bg-transparent p-0 border-0" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View">
-                                                <i class="material-symbols-outlined fs-16 fw-normal text-primary">visibility</i>
-                                            </button>
-                                            <button class="bg-transparent p-0 border-0 hover-text-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit Lead">
-                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">edit</i>
-                                            </button>
-                                            <button class="bg-transparent p-0 border-0 hover-text-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete">
-                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">delete</i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-body">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="flexCheckDefault6">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="customers.html" class="d-flex align-items-center text-decoration-none">
-                                            <div class="flex-shrink-0">
-                                                <img src="assets/images/user5.jpg" class="rounded-circle" style="width: 50px; height: 50px;" alt="user1">
-                                            </div>
-                                            <div class="flex-grow-1 ms-12">
-                                                <h3 class="fw-medium hover-text mb-0 fs-16">Kendall Allen</h3>
-                                            </div>
-                                        </a>
-                                    </td>
-                                    <td class="text-body">kendall@fila.com</td>
-                                    <td class="text-body">Online Store</td>
-                                    <td>
-                                        <span class="text-success bg-success bg-opacity-10 fs-15 fw-normal d-inline-block default-badge">New</span>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex justify-content-end" style="gap: 12px;">
-                                            <button class="bg-transparent p-0 border-0" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View">
-                                                <i class="material-symbols-outlined fs-16 fw-normal text-primary">visibility</i>
-                                            </button>
-                                            <button class="bg-transparent p-0 border-0 hover-text-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit Lead">
-                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">edit</i>
-                                            </button>
-                                            <button class="bg-transparent p-0 border-0 hover-text-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete">
-                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">delete</i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
+                                @if (ViewBag.LowBudgetCustomers != null)
+                                {
+                                    foreach (var item in ViewBag.LowBudgetCustomers)
+                                    {
+                                        // Resim kontrolü
+                                        string imgUrl = string.IsNullOrEmpty(item.CustomerImageUrl) ? "assets/images/user1.jpg" : "https://plus.unsplash.com/premium_photo-1739201499542-63a08724a1cd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTZ8fHVzZXIlMjBwcm9maWxlJTIwaWNvbnxlbnwwfHwwfHx8MA%3D%3D";
+
+                                        // Duruma Göre Renk Ayarı (Opsiyonel Güzellik)
+                                        string badgeClass = "bg-primary text-primary"; // Varsayılan Mavi
+                                        if (item.Status == "Completed") badgeClass = "bg-success text-success";
+                                        else if (item.Status == "Pending") badgeClass = "bg-warning text-warning";
+                                        else if (item.Status == "Cancelled") badgeClass = "bg-danger text-danger";
+
+                                        <tr>
+                                            <td class="text-body" style="width: 62px;">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <a href="#" class="d-flex align-items-center text-decoration-none">
+                                                    <div class="flex-shrink-0">
+                                                        <img src="@imgUrl" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;" alt="user">
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-12">
+                                                        <h3 class="fw-medium hover-text mb-0 fs-16">@item.CustomerName @item.CustomerSurname</h3>
+                                                    </div>
+                                                </a>
+                                            </td>
+                                            <td class="text-body">@item.Email</td>
+                                            <td class="text-body">@item.PaymentMethod</td>
+                                            <td>
+                                                <span class="@badgeClass bg-opacity-10 fs-15 fw-normal d-inline-block default-badge">
+                                                    @item.Status
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex justify-content-end">
+                                                    <span class="fw-bold text-dark fs-16">@item.TotalPrice.ToString("C2")</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
                             </tbody>
                         </table>
                     </div>
 
                     <div class="d-flex justify-content-center justify-content-sm-between align-items-center text-center flex-wrap gap-2 showing-wrap pt-15 p-20">
-                        <span class="fs-15">Showing 1 to 5 of 50 entries</span>
-
-                        <nav class="custom-pagination" aria-label="Page navigation example">
-                            <ul class="pagination mb-0 justify-content-center">
-                                <li class="page-item">
-                                    <button class="page-link icon" aria-label="Previous">
-                                        <i class="material-symbols-outlined">west</i>
-                                    </button>
-                                </li>
-                                <li class="page-item">
-                                    <button class="page-link active">1</button>
-                                </li>
-                                <li class="page-item">
-                                    <button class="page-link">2</button>
-                                </li>
-                                <li class="page-item">
-                                    <button class="page-link">3</button>
-                                </li>
-                                <li class="page-item">
-                                    <button class="page-link icon" aria-label="Next">
-                                        <i class="material-symbols-outlined">east</i>
-                                    </button>
-                                </li>
-                            </ul>
-                        </nav>
+                        <span class="fs-15">En düşük 6 kayıt gösteriliyor</span>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xxl-8 col-xxxl-12">
-            <div class="card bg-white rounded-10 border border-white mb-4">
-                <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 p-20">
-                    <h3>To Do List</h3>
 
-                    <form class="table-src-form position-relative ms-0">
-                        <input type="text" class="form-control" placeholder="Search here...">
-                        <div class="src-btn position-absolute top-50 start-0 translate-middle-y bg-transparent p-0 border-0">
-                            <span class="material-symbols-outlined">search</span>
-                        </div>
-                    </form>
-                </div>
 
-                <div class="default-table-area mx-minus-1 table-to-do-list">
-                    <div class="table-responsive">
-                        <table class="table align-middle">
-                            <thead>
-                                <tr>
-                                    <th scope="col" class="fw-medium pe-0">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="flexCheckDefault7">
-                                        </div>
-                                    </th>
-                                    <th scope="col" class="fw-medium ps-0">Task ID</th>
-                                    <th scope="col" class="fw-medium">Task Name</th>
-                                    <th scope="col" class="fw-medium">Assigned To</th>
-                                    <th scope="col" class="fw-medium">Due Date</th>
-                                    <th scope="col" class="fw-medium">Priority</th>
-                                    <th scope="col" class="fw-medium">Status</th>
-                                    <th scope="col" class="fw-medium">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="text-body pe-0" style="width: 62px;">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="flexCheckDefault8">
-                                        </div>
-                                    </td>
-                                    <td class="text-body ps-0">#951</td>
-                                    <td class="text-body">Hotel management system</td>
-                                    <td class="text-secondary">Shawn Kennedy</td>
-                                    <td class="text-body">15 Nov, 2025</td>
-                                    <td class="text-body">High</td>
-                                    <td>
-                                        <span class="text-warning bg-warning bg-opacity-10 fs-15 fw-normal d-inline-block default-badge">In Progress</span>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex justify-content-end" style="gap: 12px;">
-                                            <button class="bg-transparent p-0 border-0" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View">
-                                                <i class="material-symbols-outlined fs-16 fw-normal text-primary">visibility</i>
-                                            </button>
-                                            <button class="bg-transparent p-0 border-0 hover-text-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit">
-                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">edit</i>
-                                            </button>
-                                            <button class="bg-transparent p-0 border-0 hover-text-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete">
-                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">delete</i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-body pe-0" style="width: 62px;">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="flexCheckDefault9">
-                                        </div>
-                                    </td>
-                                    <td class="text-body ps-0">#587</td>
-                                    <td class="text-body">Send proposal to APR Ltd</td>
-                                    <td class="text-secondary">Roberto Cruz</td>
-                                    <td class="text-body">14 Nov, 2025</td>
-                                    <td class="text-body">Medium</td>
-                                    <td>
-                                        <span class="text-success bg-success bg-opacity-10 fs-15 fw-normal d-inline-block default-badge">Pending</span>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex justify-content-end" style="gap: 12px;">
-                                            <button class="bg-transparent p-0 border-0" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View">
-                                                <i class="material-symbols-outlined fs-16 fw-normal text-primary">visibility</i>
-                                            </button>
-                                            <button class="bg-transparent p-0 border-0 hover-text-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit">
-                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">edit</i>
-                                            </button>
-                                            <button class="bg-transparent p-0 border-0 hover-text-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete">
-                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">delete</i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-body pe-0" style="width: 62px;">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="flexCheckDefault10">
-                                        </div>
-                                    </td>
-                                    <td class="text-body ps-0">#618</td>
-                                    <td class="text-body">Python upgrade</td>
-                                    <td class="text-secondary">Juli Johnson</td>
-                                    <td class="text-body">13 Nov, 2025</td>
-                                    <td class="text-body">High</td>
-                                    <td>
-                                        <span class="text-primary bg-primary bg-opacity-10 fs-15 fw-normal d-inline-block default-badge">Completed</span>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex justify-content-end" style="gap: 12px;">
-                                            <button class="bg-transparent p-0 border-0" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View">
-                                                <i class="material-symbols-outlined fs-16 fw-normal text-primary">visibility</i>
-                                            </button>
-                                            <button class="bg-transparent p-0 border-0 hover-text-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit">
-                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">edit</i>
-                                            </button>
-                                            <button class="bg-transparent p-0 border-0 hover-text-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete">
-                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">delete</i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-body pe-0" style="width: 62px;">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="flexCheckDefault11">
-                                        </div>
-                                    </td>
-                                    <td class="text-body ps-0">#367</td>
-                                    <td class="text-body">Schedule meeting with Fila</td>
-                                    <td class="text-secondary">Catalina Engles</td>
-                                    <td class="text-body">12 Nov, 2025</td>
-                                    <td class="text-body">Low</td>
-                                    <td>
-                                        <span class="text-danger bg-danger bg-opacity-10 fs-15 fw-normal d-inline-block default-badge">Not Started</span>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex justify-content-end" style="gap: 12px;">
-                                            <button class="bg-transparent p-0 border-0" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View">
-                                                <i class="material-symbols-outlined fs-16 fw-normal text-primary">visibility</i>
-                                            </button>
-                                            <button class="bg-transparent p-0 border-0 hover-text-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit">
-                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">edit</i>
-                                            </button>
-                                            <button class="bg-transparent p-0 border-0 hover-text-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete">
-                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">delete</i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-body pe-0" style="width: 62px;">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="flexCheckDefault12">
-                                        </div>
-                                    </td>
-                                    <td class="text-body ps-0">#761</td>
-                                    <td class="text-body">Engineering lite touch</td>
-                                    <td class="text-secondary">Louis Nagle</td>
-                                    <td class="text-body">11 Nov, 2025</td>
-                                    <td class="text-body">Medium</td>
-                                    <td>
-                                        <span class="text-warning bg-warning bg-opacity-10 fs-15 fw-normal d-inline-block default-badge">In Progress</span>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex justify-content-end" style="gap: 12px;">
-                                            <button class="bg-transparent p-0 border-0" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View">
-                                                <i class="material-symbols-outlined fs-16 fw-normal text-primary">visibility</i>
-                                            </button>
-                                            <button class="bg-transparent p-0 border-0 hover-text-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit">
-                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">edit</i>
-                                            </button>
-                                            <button class="bg-transparent p-0 border-0 hover-text-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete">
-                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">delete</i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-body pe-0" style="width: 62px;">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="flexCheckDefault13">
-                                        </div>
-                                    </td>
-                                    <td class="text-body ps-0">#431</td>
-                                    <td class="text-body">Refund bill payment</td>
-                                    <td class="text-secondary">Michael Marquez</td>
-                                    <td class="text-body">10 Nov, 2025</td>
-                                    <td class="text-body">Low</td>
-                                    <td>
-                                        <span class="text-danger bg-danger bg-opacity-10 fs-15 fw-normal d-inline-block default-badge">Not Started</span>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex justify-content-end" style="gap: 12px;">
-                                            <button class="bg-transparent p-0 border-0" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View">
-                                                <i class="material-symbols-outlined fs-16 fw-normal text-primary">visibility</i>
-                                            </button>
-                                            <button class="bg-transparent p-0 border-0 hover-text-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit">
-                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">edit</i>
-                                            </button>
-                                            <button class="bg-transparent p-0 border-0 hover-text-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete">
-                                                <i class="material-symbols-outlined fs-16 fw-normal text-body">delete</i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
 
-                    <div class="text-end p-20">
-                        <button class="bg-transparent text-primary fs-16 border-0 p-0" data-bs-toggle="modal" data-bs-target="#exampleModal">+ Add New Task</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xxl-4 col-xxxl-12">
-            <div class="row">
-                <div class="col-xxxl-6 col-xxl-12">
-                    <div class="card bg-white rounded-10 border border-white p-20 mb-4">
-                        <h3 class="mb-20">Client Payment Status</h3>
-                        <div id="client_payment_status_chart" style="margin-bottom: -15px;"></div>
-                    </div>
-                </div>
-                <div class="col-xxxl-6 col-xxl-12">
-                    <div class="card bg-white rounded-10 border-0 mb-4 overflow-hidden">
-                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 p-20">
-                            <h3 class="mb-20">Total Leads</h3>
-                            <span class="d-flex align-content-center gap-1 bg-success bg-opacity-10 border border-success" style="padding: 3px 5px;">
-                                <i class="material-symbols-outlined fs-14 text-success">trending_up</i>
-                                <span class="lh-1 fs-14 text-success">75%</span>
-                            </span>
-                        </div>
 
-                        <div class="total_leads_chart" style="margin: -54px -15px -32px -25px;">
-                            <div id="total_leads_chart"></div>
-                        </div>
-                    </div>
-                </div>
+
+
+
+
+
+
+
+            
             </div>
         </div>
     </div>
 
-    <!-- Modal Add New Task -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered rounded-10" style="max-width: 550px;">
-            <form class="modal-content bg-white">
-                <div class="modal-header border-border-color-40 p-20">
-                    <h1 class="modal-title fs-18 fw-medium mb-0" id="exampleModalLabel">Add New Task</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body p-20 pb-0">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="mb-20">
-                                <label class="label">Task Name</label>
-                                <div class="form-floating">
-                                    <input type="email" class="form-control" id="floatingInput" placeholder="Task Name">
-                                    <label for="floatingInput">Task Name</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="mb-20">
-                                <label class="label">Assigned To</label>
-                                <div class="form-floating">
-                                    <select class="form-select form-control" id="floatingSelect2" aria-label="Floating label select example">
-                                        <option selected>Select</option>
-                                        <option value="1">Juli Johnson</option>
-                                        <option value="2">Catalina Engles</option>
-                                        <option value="3">Louis Nagle</option>
-                                        <option value="4">Michael Marquez</option>
-                                        <option value="4">Roberto Cruz</option>
-                                    </select>
-                                    <label for="floatingSelect2">Select</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="mb-20">
-                                <label class="label">Due Date</label>
-                                <input type="date" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="mb-20">
-                                <label class="label">Priority</label>
-                                <div class="form-floating">
-                                    <select class="form-select form-control" id="floatingSelect3" aria-label="Floating label select example">
-                                        <option selected>Select</option>
-                                        <option value="1">Medium</option>
-                                        <option value="2">Low</option>
-                                        <option value="3">High</option>
-                                    </select>
-                                    <label for="floatingSelect3">Select</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="mb-20">
-                                <label class="label">Status</label>
-                                <div class="form-floating">
-                                    <select class="form-select form-control" id="floatingSelect4" aria-label="Floating label select example">
-                                        <option selected>Select</option>
-                                        <option value="1">Pending</option>
-                                        <option value="2">Completed</option>
-                                        <option value="3">Not Started</option>
-                                        <option value="4">In Progress</option>
-                                    </select>
-                                    <label for="floatingSelect4">Select</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer border-0 p-20 pt-0">
-                    <button type="button" class="btn btn-danger fw-normal text-white" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary fw-normal text-white">Create</button>
-                </div>
-            </form>
-        </div>
-    </div>
+
+
+
+
+
+   
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
@@ -1118,5 +584,304 @@
         const chart = new ApexCharts(document.querySelector('#most_leads_chart2'), options);
         chart.render();
     }
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jsvectormap/dist/js/jsvectormap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsvectormap/dist/maps/world-merc.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+        const getCountryStatsId = document.getElementById('country_stats_map2');
+
+        if (getCountryStatsId) {
+            // 1. Controller'dan gelen Marker listesini alıyoruz
+            var markersFromDB = @Html.Raw(Json.Serialize(ViewBag.MapMarkers));
+
+            var jvm = new jsVectorMap({
+                map: "world_merc",
+                selector: "#country_stats_map2",
+                zoomButtons: true,
+
+                // Harita yüklendiğinde boyut ayarı
+                onLoaded(map) {
+                    window.addEventListener("resize", () => {
+                        map.updateSize();
+                    });
+                },
+
+                // Harita Arka Plan Rengi (Gri tonu)
+                regionStyle: {
+                    initial: { fill: '#d1d4db' }
+                },
+
+                // Marker İsimlerini Göster
+                labels: {
+                    markers: {
+                        render: (marker) => marker.name
+                    }
+                },
+
+                // Marker Seçilebilirlik Ayarları
+                markersSelectable: true,
+
+                // Varsayılan olarak hepsini seçili (kırmızı) yapmak istersen:
+                // selectedMarkers: markersFromDB.map((_, index) => index),
+
+                // Controller'dan gelen veriyi buraya veriyoruz
+                markers: markersFromDB,
+
+                // Marker stilleri (Mavi normal, Kırmızı seçili/hover)
+                markerStyle: {
+                    initial: { fill: "#5c5cff", stroke: "#fff", "stroke-width": 2 },
+                    hover:   { fill: "#ff5050" },
+                    selected: { fill: "#ff5050" }
+                },
+
+                // Marker üzerindeki yazı stili
+                markerLabelStyle: {
+                    initial: {
+                        fontFamily: "Inter",
+                        fontWeight: 400,
+                        fontSize: 12, // Yazı boyutu (0 yaparsan isimler görünmez)
+                        fill: '#333'
+                    }
+                },
+
+                // Tooltip: Üzerine gelince Sayıyı Göster
+                onMarkerTooltipShow(event, tooltip, index) {
+                    const markerData = markersFromDB[index];
+                    tooltip.text(
+                        `<strong>${markerData.name}</strong>: ${markerData.count} Ziyaretçi`
+                    );
+                }
+            });
+        }
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // HTML'deki ID'yi doğru seçiyoruz: tasks_stats_chart2
+        const chartElement = document.querySelector('#tasks_stats_chart2');
+
+        if (chartElement) {
+
+            // 1. Controller'dan gelen verileri alıyoruz
+            var orderCounts = @Html.Raw(Json.Serialize(ViewBag.MonthlyOrders));
+            var productQuantities = @Html.Raw(Json.Serialize(ViewBag.MonthlyQuantities));
+
+            var options = {
+                series: [
+                    {
+                        name: "Sipariş Sayısı",
+                        data: orderCounts // [10, 5, 20...] gibi gelir
+                    },
+                    {
+                        name: "Satılan Ürün Adedi",
+                        data: productQuantities // [50, 25, 100...] gibi gelir
+                    }
+                ],
+                chart: {
+                    height: 225,
+                    type: "line",
+                    toolbar: {
+                        show: false
+                    }
+                },
+                colors: [
+                    "#00cae3", "#ffb264" // Mavi ve Turuncu
+                ],
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    width: 2,
+                    curve: "smooth", // Çizgileri yumuşatır (straight derseniz keskin olur)
+                    dashArray: [0, 5] // İkinci çizgiyi kesikli yapar
+                },
+                legend: {
+                    show: true, // Açıklamaları gösterelim ki neyin ne olduğu anlaşılsın
+                    position: 'top',
+                    horizontalAlign: 'right',
+                    fontSize: '14px',
+                    fontFamily: 'Outfit',
+                    labels: {
+                        colors: "#5b6b79" // Temanıza göre renk değişebilir
+                    }
+                },
+                markers: {
+                    size: 4,
+                    hover: {
+                        sizeOffset: 2
+                    }
+                },
+                xaxis: {
+                    categories: [
+                        "Oca", "Şub", "Mar", "Nis", "May", "Haz",
+                        "Tem", "Ağu", "Eyl", "Eki", "Kas", "Ara"
+                    ],
+                    axisBorder: {
+                        show: true,
+                        color: '#f1f1f1'
+                    },
+                    axisTicks: {
+                        show: true,
+                        color: '#f1f1f1'
+                    },
+                    labels: {
+                        trim: false,
+                        show: true,
+                        style: {
+                            colors: "#999",
+                            fontSize: "12px",
+                            fontFamily: 'Outfit',
+                        }
+                    }
+                },
+                yaxis: {
+                    tickAmount: 4,
+                    labels: {
+                        show: true,
+                        style: {
+                            colors: "#999",
+                            fontSize: "12px",
+                            fontFamily: 'Outfit',
+                        }
+                    }
+                },
+                grid: {
+                    strokeDashArray: 5,
+                    borderColor: "#e0e0e0",
+                },
+                tooltip: {
+                    theme: 'light'
+                }
+            };
+
+            // Chart'ı oluştur ve render et
+            const chart = new ApexCharts(chartElement, options);
+            chart.render();
+
+            // Pencere boyutu değişirse chart'ı güncelle
+            window.addEventListener('resize', () => {
+                chart.resize();
+            });
+        }
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+        // ID'yi kontrol et: earning_reports_chart2
+        const earningReportId = document.getElementById('earning_reports_chart2');
+
+        if (earningReportId) {
+
+            // 1. Controller'dan verileri al
+            var orderData = @Html.Raw(Json.Serialize(ViewBag.MonthlyOrders));
+            var revenueData = @Html.Raw(Json.Serialize(ViewBag.MonthlyRevenue));
+
+            var options = {
+                series: [
+                    {
+                        name: "Siparişler", // Orders
+                        type: "column",
+                        data: orderData // [10, 20, 5...]
+                    },
+                    {
+                        name: "Kazanç (₺)", // Sales
+                        type: "line",
+                        data: revenueData // [5000, 12000, 300...]
+                    }
+                ],
+                chart: {
+                    height: 224,
+                    type: "line", // Hem line hem column olduğu için ana tip line seçilir
+                    toolbar: {
+                        show: false
+                    }
+                },
+                colors: [
+                    "#5271f2", "#00cae3" // Sütun rengi, Çizgi rengi
+                ],
+                stroke: {
+                    width: [0, 3], // Sütunun kenar çizgisi 0, Çizginin kalınlığı 3
+                    curve: 'smooth'
+                },
+                plotOptions: {
+                    bar: {
+                        columnWidth: "45%"
+                    }
+                },
+                legend: {
+                    show: false, // Efsaneyi gizle (Tasarımda gizliydi)
+                },
+                xaxis: {
+                    categories: [
+                        "Oca", "Şub", "Mar", "Nis", "May", "Haz",
+                        "Tem", "Ağu", "Eyl", "Eki", "Kas", "Ara"
+                    ],
+                    axisBorder: {
+                        show: false,
+                        color: '#e0e0e0'
+                    },
+                    axisTicks: {
+                        show: false,
+                        color: '#e0e0e0'
+                    },
+                    labels: {
+                        show: true,
+                        style: {
+                            colors: "#919aa3",
+                            fontSize: "14px",
+                            fontFamily: 'Outfit',
+                        }
+                    }
+                },
+                yaxis: {
+                    tickAmount: 4,
+                    labels: {
+                        show: true,
+                        style: {
+                            colors: "#919aa3",
+                            fontSize: "14px",
+                            fontFamily: 'Outfit',
+                        },
+                        // Para birimi formatı ekleyelim (Opsiyonel)
+                        formatter: function (value) {
+                            return value.toLocaleString('tr-TR', { maximumFractionDigits: 0 });
+                        }
+                    }
+                },
+                grid: {
+                    strokeDashArray: 5,
+                    borderColor: "#e0e0e0"
+                },
+                tooltip: {
+                    shared: true,
+                    intersect: false,
+                    y: {
+                        formatter: function (y) {
+                            if (typeof y !== "undefined") {
+                                return y.toLocaleString('tr-TR') + (this.seriesIndex === 1 ? " ₺" : " TL");
+                            }
+                            return y;
+                        }
+                    }
+                }
+            };
+
+            // Initialize and render the chart
+            const chart = new ApexCharts(earningReportId, options);
+            chart.render();
+
+            // Resize olayı
+            window.addEventListener('resize', () => {
+                chart.resize();
+            });
+        }
+    });
 </script>
 

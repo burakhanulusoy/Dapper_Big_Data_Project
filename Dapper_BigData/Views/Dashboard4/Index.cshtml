@@ -1,0 +1,89 @@
+﻿@{
+    ViewData["Title"] = "Müşteri Haritası";
+    Layout = "~/Views/UI/Index.cshtml";
+}
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+<div class="main-content-container overflow-hidden">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card bg-white border border-white rounded-10 p-20 mb-4">
+                <h3 class="mb-20">Müşteri Lokasyon Haritası</h3>
+
+                <div id="osm_map" style="width: 100%; height: 600px !important; z-index: 1;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+        // 1. Haritayı Başlat
+        var map = L.map('osm_map').setView([39.92077, 32.85411], 6);
+
+        // 2. OpenStreetMap Katmanını Ekle
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        // Harita boyutlarını yeniden hesapla (Gri alan sorununu çözer)
+        setTimeout(function(){ map.invalidateSize(); }, 500);
+
+        // 3. Verileri Al
+        var locations = @Html.Raw(Json.Serialize(ViewBag.CityLocations));
+
+        // 4. Pinleme Fonksiyonu
+        async function pinLocations() {
+            if (!locations || locations.length === 0) {
+                console.log("Gösterilecek şehir verisi yok.");
+                return;
+            }
+
+            for (const item of locations) {
+                if (!item.city) continue;
+
+                // Arama Sorgusu: "Ankara, Turkey"
+                var query = item.city + ", " + (item.country || "");
+
+                try {
+                    // Ücretsiz API Çağrısı
+                    let response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`, {
+                        headers: {
+                            'User-Agent': 'MyDashboardApp/1.0' // Nominatim bazen User-Agent ister
+                        }
+                    });
+
+                    if (!response.ok) throw new Error("API Hatası");
+
+                    let data = await response.json();
+
+                    if (data && data.length > 0) {
+                        var lat = data[0].lat;
+                        var lon = data[0].lon;
+
+                        var marker = L.marker([lat, lon]).addTo(map);
+
+                        marker.bindPopup(`
+                            <div style="text-align:center; min-width: 100px;">
+                                <b style="font-size:14px;">${item.city}</b><br>
+                                ${item.customerCount} Müşteri
+                            </div>
+                        `);
+                    }
+                } catch (error) {
+                    console.log("Hata:", error);
+                }
+
+                // Nominatim saniyede 1 isteğe izin verir, engellenmemek için bekleme süresi
+                await new Promise(r => setTimeout(r, 1000));
+            }
+        }
+
+        pinLocations();
+    });
+</script>
