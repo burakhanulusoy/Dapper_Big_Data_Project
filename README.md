@@ -42,72 +42,70 @@ Bu proje, gerçek hayat senaryolarına (Business Logic) uygun olarak **Python** 
 
 <details>
 <summary>
-  <h3 style="display:inline-block">📸 Detaylı Analizler, Grafikler ve Tabloları Görmek İçin Tıklayın</h3>
+  <h2 style="display:inline-block">✨ 📸 Detaylı Analizler, Grafikler ve Tabloları Görmek İçin Tıklayın ✨</h2>
 </summary>
 <br>
 
-<table width="100%">
-  <tr>
-    <td width="50%" align="center">
-      <h3>📉 Siparişlere Göre İstatistikler</h3>
-      <img src="https://github.com/user-attachments/assets/82798c16-b301-4520-ad1f-f37141722c1b" width="100%" />
-    </td>
-    <td width="50%" align="center">
-      <h3>📊 Kategorilere Göre İstatistikler</h3>
-      <img src="https://github.com/user-attachments/assets/9b0a079c-080b-4a1a-afcc-e7b965d7a320" width="100%" />
-    </td>
-  </tr>
+<div align="center">
+  <h3>📉 Siparişlere Göre İstatistikler</h3>
+  <img src="https://github.com/user-attachments/assets/82798c16-b301-4520-ad1f-f37141722c1b" width="100%" />
+  <br /><br />
+  <img src="https://github.com/user-attachments/assets/4f075d33-f429-470f-a77b-d4c84eb729f9" width="100%" />
+</div>
 
-  <tr>
-    <td width="50%" align="center">
-      <img src="https://github.com/user-attachments/assets/4f075d33-f429-470f-a77b-d4c84eb729f9" width="100%" />
-    </td>
-    <td width="50%" align="center">
-      <img src="https://github.com/user-attachments/assets/84896625-9646-48bb-a174-221ca49921ad" width="100%" />
-    </td>
-  </tr>
+<hr />
 
-  <tr>
-    <td width="50%" align="center">
-      <h3>📦 Ürünlere Göre İstatistikler</h3>
-      <img src="https://github.com/user-attachments/assets/03d0cd96-a54e-4290-8f77-99a81df2c1dd" width="100%" />
-    </td>
-    <td width="50%" align="center">
-      <h3>👥 Müşterilere Göre İstatistikler</h3>
-      <img src="https://github.com/user-attachments/assets/1c265009-a408-4244-b54a-afee035de7d3" width="100%" />
-    </td>
-  </tr>
+<div align="center">
+  <h3>📊 Kategorilere Göre İstatistikler</h3>
+  <img src="https://github.com/user-attachments/assets/9b0a079c-080b-4a1a-afcc-e7b965d7a320" width="100%" />
+  <br /><br />
+  <img src="https://github.com/user-attachments/assets/84896625-9646-48bb-a174-221ca49921ad" width="100%" />
+</div>
 
-  <tr>
-    <td width="50%" align="center">
-      <img src="https://github.com/user-attachments/assets/213a31f0-1678-40a0-a39e-20d90766b933" width="100%" />
-    </td>
-    <td width="50%" align="center">
-      <img src="https://github.com/user-attachments/assets/07eade7c-54cf-4a25-843d-b1bf39968fbd" width="100%" />
-    </td>
-  </tr>
+<hr />
 
-  <tr>
-    <td width="50%" align="center">
-      <h3></h3>
-      <img src="https://github.com/user-attachments/assets/96455b31-3647-4f31-8735-15513c60f014" width="100%" />
-    </td>
-    <td width="50%" align="center">
-      <img src="https://github.com/user-attachments/assets/3170af54-901a-463b-a77f-1c8fb33e86f9" width="100%" />
-    </td>
-  </tr>
+<div align="center">
+  <h3>📦 Ürünlere ve Müşterilere Göre İstatistikler</h3>
+  <img src="https://github.com/user-attachments/assets/03d0cd96-a54e-4290-8f77-99a81df2c1dd" width="100%" />
+  <br /><br />
+  <img src="https://github.com/user-attachments/assets/1c265009-a408-4244-b54a-afee035de7d3" width="100%" />
+</div>
 
-  <tr>
-    <td width="50%" align="center">
-      <img src="https://github.com/user-attachments/assets/cfefa8ae-6727-41fd-bc33-5c72adc3a191" width="100%" />
-    </td>
-    <td width="50%" align="center">
-      <img src="https://github.com/user-attachments/assets/6fc715d6-20f3-4b38-a530-9400c4e0ae2d" width="100%" />
-    </td>
-  </tr>
-</table>
+<hr />
 
+<div align="center">
+  <h3>📋 Detaylı Listeler ve Raporlar</h3>
+  <img src="https://github.com/user-attachments/assets/213a31f0-1678-40a0-a39e-20d90766b933" width="100%" />
+  <br /><br />
+  <img src="https://github.com/user-attachments/assets/07eade7c-54cf-4a25-843d-b1bf39968fbd" width="100%" />
+</div>
+
+<hr />
+
+<div align="center">
+  <h3></h3>
+  <img src="https://github.com/user-attachments/assets/96455b31-3647-4f31-8735-15513c60f014" width="100%" />
+  <br /><br />
+  <img src="https://github.com/user-attachments/assets/3170af54-901a-463b-a77f-1c8fb33e86f9" width="100%" />
+</div>
+
+<hr />
+
+<div align="center">
+  <h3>💻 Kod Yapısı ve Mimari</h3>
+  <img src="https://github.com/user-attachments/assets/cfefa8ae-6727-41fd-bc33-5c72adc3a191" width="100%" />
+  <br /><br />
+  <img src="https://github.com/user-attachments/assets/6fc715d6-20f3-4b38-a530-9400c4e0ae2d" width="100%" />
+  <br /><br />
+  <img src="https://github.com/user-attachments/assets/4e47872d-4959-486c-839a-df7c03fdbe18" width="100%" />
+</div>
+
+<br />
 </details>
+
+---
+
+
 
 ## 💡 Neden Dapper?
 
