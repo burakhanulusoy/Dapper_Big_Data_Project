@@ -252,6 +252,80 @@ namespace Dapper_BigData.Controllers
 
 
 
+            string queryPerformance = @"
+    WITH MonthlyCustomerStats AS (
+        SELECT 
+            MONTH(o.OrderDate) as Month,
+            c.CustomerName + ' ' + c.CustomerSurname as FullName,
+            SUM(o.Quantity) as TotalQty
+        FROM Orders o
+        JOIN Customers c ON o.CustomerId = c.CustomerId
+        GROUP BY MONTH(o.OrderDate), c.CustomerName, c.CustomerSurname
+    ),
+    RankedStats AS (
+        SELECT 
+            Month, FullName, TotalQty,
+            ROW_NUMBER() OVER (PARTITION BY Month ORDER BY TotalQty DESC) as RnMax,
+            ROW_NUMBER() OVER (PARTITION BY Month ORDER BY TotalQty ASC) as RnMin
+        FROM MonthlyCustomerStats
+    )
+    SELECT 
+        Month,
+        MAX(CASE WHEN RnMax = 1 THEN TotalQty END) as MaxQuantity,
+        MAX(CASE WHEN RnMax = 1 THEN FullName END) as MaxCustomerName,
+        MAX(CASE WHEN RnMin = 1 THEN TotalQty END) as MinQuantity,
+        MAX(CASE WHEN RnMin = 1 THEN FullName END) as MinCustomerName
+    FROM RankedStats
+    GROUP BY Month ORDER BY Month";
+
+            var performanceData = (await connection.QueryAsync<CustomerPerformanceViewModel>(queryPerformance)).ToList();
+
+            // Chart için 12 aylık hazırlık
+            var rangeSeries = new List<object>();
+            var maxLineSeries = new List<object>();
+            var minLineSeries = new List<object>();
+            var maxCustomerNames = new string[12];
+            var minCustomerNames = new string[12];
+
+            for (int i = 1; i <= 12; i++)
+            {
+                var dataPoint = performanceData.FirstOrDefault(x => x.Month == i);
+                string monthName = System.Globalization.CultureInfo.GetCultureInfo("tr-TR").DateTimeFormat.GetAbbreviatedMonthName(i);
+
+                if (dataPoint != null)
+                {
+                    // Range Area: [Min, Max]
+                    rangeSeries.Add(new { x = monthName, y = new[] { dataPoint.MinQuantity, dataPoint.MaxQuantity } });
+                    // Çizgiler için tekil değerler
+                    maxLineSeries.Add(new { x = monthName, y = dataPoint.MaxQuantity });
+                    minLineSeries.Add(new { x = monthName, y = dataPoint.MinQuantity });
+                    // İsimler (Tooltip için)
+                    maxCustomerNames[i - 1] = dataPoint.MaxCustomerName;
+                    minCustomerNames[i - 1] = dataPoint.MinCustomerName;
+                }
+            }
+
+            ViewBag.RangeData = rangeSeries;
+            ViewBag.MaxLineData = maxLineSeries;
+            ViewBag.MinLineData = minLineSeries;
+            ViewBag.MaxNames = maxCustomerNames;
+            ViewBag.MinNames = minCustomerNames;
+
+            string queryStats = @"
+    SELECT 
+        (SELECT COUNT(*) FROM Customers) as TotalCustomers,
+        (SELECT COUNT(*) FROM Orders) as TotalOrders,
+        (SELECT COUNT(*) FROM Orders WHERE Status = 'Teslim Edildi') as DeliveredOrders,
+        (SELECT COUNT(*) FROM Orders WHERE Status <> 'Teslim Edildi') as NotDeliveredOrders";
+
+            // Tek satır geleceği için QueryFirstOrDefaultAsync kullanıyoruz
+            var stats = await connection.QueryFirstOrDefaultAsync<DashboardStatsViewModel>(queryStats);
+
+            // Eğer veri gelmezse hata vermemesi için new'leyelim
+            if (stats == null) stats = new DashboardStatsViewModel();
+
+            ViewBag.Stats = stats;
+
 
             return View();
         }

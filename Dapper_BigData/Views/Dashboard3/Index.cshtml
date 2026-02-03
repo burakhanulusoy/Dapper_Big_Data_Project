@@ -12,12 +12,13 @@
             <div class="col-xxl-6 col-xxxl-12">
                 <div class="pe-xxl-4">
                     <div class="row">
+
                         <div class="col-sm-6">
                             <div class="card bg-white p-20 rounded-10 border border-white mb-4">
                                 <div class="d-flex">
                                     <div class="flex-grow-1">
-                                        <h3 class="mb-10">Total Employee</h3>
-                                        <h2 class="fs-26 mb-0 lh-1 fw-medium">1,705</h2>
+                                        <h3 class="mb-10">Toplam Müşteri</h3>
+                                        <h2 class="fs-26 mb-0 lh-1 fw-medium">@ViewBag.Stats.TotalCustomers</h2>
                                     </div>
                                     <div class="flex-shrink-0 ms-3">
                                         <div class="bg-info text-white text-center rounded-circle d-flex justify-content-center align-items-center" style="width: 65px; height: 65px;">
@@ -26,80 +27,68 @@
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center" style="margin-top: 16px;">
-                                    <p class="mb-0 fs-14">4.75% Increase in last month</p>
-                                    <span class="d-flex align-content-center gap-1 bg-success bg-opacity-10 border border-success" style="padding: 3px 5px;">
-                                        <i class="material-symbols-outlined fs-14 text-success">trending_up</i>
-                                        <span class="lh-1 fs-14 text-success">4.75%</span>
-                                    </span>
+                                    <p class="mb-0 fs-14">Kayıtlı Aktif Üyeler</p>
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-sm-6">
                             <div class="card bg-white p-20 rounded-10 border border-white mb-4">
                                 <div class="d-flex">
                                     <div class="flex-grow-1">
-                                        <h3 class="mb-10">New Employee</h3>
-                                        <h2 class="fs-26 mb-0 lh-1 fw-medium">35</h2>
+                                        <h3 class="mb-10">Toplam Sipariş</h3>
+                                        <h2 class="fs-26 mb-0 lh-1 fw-medium">@ViewBag.Stats.TotalOrders</h2>
                                     </div>
                                     <div class="flex-shrink-0 ms-3">
                                         <div class="bg-primary-50 text-white text-center rounded-circle d-flex justify-content-center align-items-center" style="width: 65px; height: 65px;">
-                                            <i class="material-symbols-outlined fs-30">groups</i>
+                                            <i class="material-symbols-outlined fs-30">shopping_cart</i>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center" style="margin-top: 16px;">
-                                    <p class="mb-0 fs-14">15.5% Increase in last month</p>
-                                    <span class="d-flex align-content-center gap-1 bg-success bg-opacity-10 border border-success" style="padding: 3px 5px;">
-                                        <i class="material-symbols-outlined fs-14 text-success">trending_up</i>
-                                        <span class="lh-1 fs-14 text-success">15.5%</span>
-                                    </span>
+                                    <p class="mb-0 fs-14">Tüm Zamanlar</p>
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-sm-6">
                             <div class="card bg-white p-20 rounded-10 border border-white mb-4">
                                 <div class="d-flex">
                                     <div class="flex-grow-1">
-                                        <h3 class="mb-10">Departures Employee</h3>
-                                        <h2 class="fs-26 mb-0 lh-1 fw-medium">5</h2>
+                                        <h3 class="mb-10">Teslim Edilen</h3>
+                                        <h2 class="fs-26 mb-0 lh-1 fw-medium">@ViewBag.Stats.DeliveredOrders</h2>
+                                    </div>
+                                    <div class="flex-shrink-0 ms-3">
+                                        <div class="bg-success text-white text-center rounded-circle d-flex justify-content-center align-items-center" style="width: 65px; height: 65px;">
+                                            <i class="material-symbols-outlined fs-30">check_circle</i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center" style="margin-top: 16px;">
+                                    <p class="mb-0 fs-14 text-success">Başarılı Teslimat</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="card bg-white p-20 rounded-10 border border-white mb-4">
+                                <div class="d-flex">
+                                    <div class="flex-grow-1">
+                                        <h3 class="mb-10">Süreci Devam Eden</h3>
+                                        <h2 class="fs-26 mb-0 lh-1 fw-medium">@ViewBag.Stats.NotDeliveredOrders</h2>
                                     </div>
                                     <div class="flex-shrink-0 ms-3">
                                         <div class="bg-warning text-white text-center rounded-circle d-flex justify-content-center align-items-center" style="width: 65px; height: 65px;">
-                                            <i class="material-symbols-outlined fs-30">supervisor_account</i>
+                                            <i class="material-symbols-outlined fs-30">local_shipping</i>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center" style="margin-top: 16px;">
-                                    <p class="mb-0 fs-14">5.25% departure in  last month</p>
-                                    <span class="d-flex align-content-center gap-1 bg-danger bg-opacity-10 border border-danger" style="padding: 3px 5px;">
-                                        <i class="material-symbols-outlined fs-14 text-danger">trending_down</i>
-                                        <span class="lh-1 fs-14 text-danger">5.25%</span>
-                                    </span>
+                                    <p class="mb-0 fs-14 text-warning">Kargo/Hazırlanıyor</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="card bg-white p-20 rounded-10 border border-white mb-4">
-                                <div class="d-flex">
-                                    <div class="flex-grow-1">
-                                        <h3 class="mb-10">Employee Salary</h3>
-                                        <h2 class="fs-26 mb-0 lh-1 fw-medium">$3.5M</h2>
-                                    </div>
-                                    <div class="flex-shrink-0 ms-3">
-                                        <div class="bg-info-40 text-white text-center rounded-circle d-flex justify-content-center align-items-center" style="width: 65px; height: 65px;">
-                                            <i class="material-symbols-outlined fs-30">account_balance</i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center" style="margin-top: 16px;">
-                                    <p class="mb-0 fs-14">10.15% Increase in last month</p>
-                                    <span class="d-flex align-content-center gap-1 bg-success bg-opacity-10 border border-success" style="padding: 3px 5px;">
-                                        <i class="material-symbols-outlined fs-14 text-success">trending_up</i>
-                                        <span class="lh-1 fs-14 text-success">10.15%</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -124,7 +113,7 @@
                         </div>
                     </div>
                     <div style="margin: 0 -10px -14px -17px;">
-                        <div id="employee_performance_chart"></div>
+                        <div id="employee_performance_chart2"></div>
                     </div>
                 </div>
             </div>
@@ -708,3 +697,80 @@
     });
 </script>
 
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const chartId = document.getElementById('employee_performance_chart2');
+        if (chartId) {
+            // Verileri Al
+            var rangeData = @Html.Raw(Json.Serialize(ViewBag.RangeData));
+            var maxLineData = @Html.Raw(Json.Serialize(ViewBag.MaxLineData));
+            var minLineData = @Html.Raw(Json.Serialize(ViewBag.MinLineData));
+            var maxNames = @Html.Raw(Json.Serialize(ViewBag.MaxNames));
+            var minNames = @Html.Raw(Json.Serialize(ViewBag.MinNames));
+
+            var options = {
+                series: [
+                    {
+                        type: "rangeArea",
+                        name: "Alım Aralığı",
+                        data: rangeData
+                    },
+                    {
+                        type: "line",
+                        name: "En Çok Alan",
+                        data: maxLineData
+                    },
+                    {
+                        type: "line",
+                        name: "En Az Alan",
+                        data: minLineData
+                    }
+                ],
+                chart: {
+                    height: 300,
+                    type: "rangeArea",
+                    toolbar: { show: false }
+                },
+                colors: ["#63F0FD", "#63F0FD", "#FFB264"], // Alan ve Üst çizgi Mavi, Alt çizgi Turuncu
+                stroke: { curve: "straight", width: [0, 2, 2] },
+                fill: { opacity: [0.24, 1, 1] },
+                xaxis: {
+                    labels: { style: { colors: "#919aa3", fontFamily: 'Outfit' } }
+                },
+                yaxis: {
+                    title: { text: "Satın Alma Adedi", style: { color: "#919aa3" } },
+                    labels: { style: { colors: "#919aa3" } }
+                },
+                legend: { show: true, position: 'bottom', labels: { colors: "#919aa3" } },
+                grid: { borderColor: "#f1f1f1", strokeDashArray: 4 },
+                // --- ÖZEL TOOLTIP ---
+                tooltip: {
+                    shared: true,
+                    custom: function({ series, seriesIndex, dataPointIndex, w }) {
+                        var maxN = maxNames[dataPointIndex] || "Yok";
+                        var minN = minNames[dataPointIndex] || "Yok";
+                        var maxV = maxLineData[dataPointIndex]?.y || 0;
+                        var minV = minLineData[dataPointIndex]?.y || 0;
+
+                        return `
+                            <div style="padding: 10px; background: #fff; border: 1px solid #eee; font-family: 'Outfit';">
+                                <div style="font-weight: bold; border-bottom: 1px solid #eee; margin-bottom: 5px;">Aylık Performans</div>
+                                <div style="color: #00cae3;">🥇 <b>En Çok:</b> ${maxN} (${maxV} Adet)</div>
+                                <div style="color: #FFB264;">🥉 <b>En Az:</b> ${minN} (${minV} Adet)</div>
+                            </div>
+                        `;
+                    }
+                }
+            };
+
+            var chart = new ApexCharts(chartId, options);
+            chart.render();
+        }
+    });
+</script>
