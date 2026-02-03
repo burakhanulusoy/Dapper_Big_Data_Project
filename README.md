@@ -83,7 +83,7 @@ Bu proje, gerçek hayat senaryolarına (Business Logic) uygun olarak **Python** 
 <hr />
 
 <div align="center">
-  <h3></h3>
+  <h3>📋 Detaylı Listeler ve Raporlar</h3>
   <img src="https://github.com/user-attachments/assets/96455b31-3647-4f31-8735-15513c60f014" width="100%" />
   <br /><br />
   <img src="https://github.com/user-attachments/assets/3170af54-901a-463b-a77f-1c8fb33e86f9" width="100%" />
@@ -92,7 +92,7 @@ Bu proje, gerçek hayat senaryolarına (Business Logic) uygun olarak **Python** 
 <hr />
 
 <div align="center">
-  <h3>💻 Kod Yapısı ve Mimari</h3>
+  <h3>💻 Haritalandırma & Sql</h3>
   <img src="https://github.com/user-attachments/assets/cfefa8ae-6727-41fd-bc33-5c72adc3a191" width="100%" />
   <br /><br />
   <img src="https://github.com/user-attachments/assets/6fc715d6-20f3-4b38-a530-9400c4e0ae2d" width="100%" />
